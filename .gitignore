@@ -2,7 +2,6 @@
 .sass-cache
 composer.lock
 cache/*
-!.gitkeep
 assets/*
 logs/*
 images/*
@@ -15,3 +14,5 @@ ehthumbs.db
 Icon?
 Thumbs.db
 *.swp
+
+!.gitkeep
