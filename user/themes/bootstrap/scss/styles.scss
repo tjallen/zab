@@ -436,12 +436,16 @@ ul.list-social {
 	}
 }
 
-footer {
+footer#footer {
 	background-color: $col-coral;
 	color: #fff;
 	position: relative;
 	margin-top: 3rem;
 	padding: 1.5rem;
+	text-align: center;
+	p {
+		color: #fff;
+	}
 	a {
 		color: $col-blu-dark;
 	}
@@ -452,33 +456,77 @@ footer {
 
 // queries NEW
 
-@media (min-width: 48em) {
+// tablet +
+@media (min-width: 34em) {
 
-nav.navbar {
-	ul.navbar-nav {
-		li.nav-item {
-			display: inline-block;
-			
-			margin: 0.1rem;
-			a {
-				padding: 0.6rem;
+	nav.navbar {
+		ul.navbar-nav {
+			li.nav-item {
+				display: inline-block;
+				margin: 0.1rem;
+				a {
+					padding: 0.6rem;
+				}
 			}
 		}
 	}
+
+	.blog-header-image {
+		.blog-header-image-inner {
+			padding: 4rem 0 7rem;
+			h1 {
+				font-size: 3rem;
+			}
+			h2.slogan {
+				font-size: 1rem;
+			}
+		}
+	}
+
+	h2 {
+		font-size: 1.75rem;
+	}
+
+	h3 {
+		font-size: 1.5rem;
+	}
+
+	h4 {
+		font-size: 1.25rem;
+	}
+
+	div#sidebar {
+		div.sidebar-header {
+			border-top: none;
+		}
+	}
+
 }
 
-h2 {
-	font-size: 1.75rem;
-}
+@media (min-width: 66em) {
+	.blog-header-image {
+		.blog-header-image-inner {
+			padding: 5rem 0 8rem;
+			h1 {
+				font-size: 4rem;
+			}
+			h2.slogan {
+				font-size: 1.5rem;
+			}
+		}
+	}
 
-h3 {
-	font-size: 1.5rem;
-}
+	h2 {
+		font-size: 2rem;
+	}
 
-h4 {
-	font-size: 1.25rem;
-}
+	h3 {
+		font-size: 1.75rem;
+	}
 
+	h4 {
+		font-size: 1.55rem;
+	}
 }
 
 // xsmall

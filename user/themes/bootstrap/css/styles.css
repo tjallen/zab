@@ -304,27 +304,52 @@ ul.list-social {
         color: #fff;
         text-decoration: none; }
 
-footer {
+footer#footer {
   background-color: #F59DA3;
   color: #fff;
   position: relative;
   margin-top: 3rem;
-  padding: 1.5rem; }
-  footer a {
+  padding: 1.5rem;
+  text-align: center; }
+  footer#footer p {
+    color: #fff; }
+  footer#footer a {
     color: #1281B1; }
 
-@media (min-width: 48em) {
+@media (min-width: 34em) {
   nav.navbar ul.navbar-nav li.nav-item {
     display: inline-block;
     margin: 0.1rem; }
     nav.navbar ul.navbar-nav li.nav-item a {
       padding: 0.6rem; }
+  .blog-header-image .blog-header-image-inner {
+    padding: 4rem 0 7rem; }
+    .blog-header-image .blog-header-image-inner h1 {
+      font-size: 3rem; }
+    .blog-header-image .blog-header-image-inner h2.slogan {
+      font-size: 1rem; }
   h2 {
     font-size: 1.75rem; }
   h3 {
     font-size: 1.5rem; }
   h4 {
-    font-size: 1.25rem; } }
+    font-size: 1.25rem; }
+  div#sidebar div.sidebar-header {
+    border-top: none; } }
+
+@media (min-width: 66em) {
+  .blog-header-image .blog-header-image-inner {
+    padding: 5rem 0 8rem; }
+    .blog-header-image .blog-header-image-inner h1 {
+      font-size: 4rem; }
+    .blog-header-image .blog-header-image-inner h2.slogan {
+      font-size: 1.5rem; }
+  h2 {
+    font-size: 2rem; }
+  h3 {
+    font-size: 1.75rem; }
+  h4 {
+    font-size: 1.55rem; } }
 
 header#header {
   position: inherit;

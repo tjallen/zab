@@ -3,11 +3,13 @@
 
 
 <div class="sidebar-header">
+
 <a href="about">
 	<img src="./images/circle-portrait-materials-blue.png" alt="" class="smile">
 </a>
 
-	<p>My name is Zabby Allen and I am a craft hoarder. Follow along for fun DIY projects, recipes, free desktop wallpapers and more! <a href="about">Find out more about me here</a>.</p>
+	<p>My name is Zabby Allen and I am a craft hoarder. Follow along for fun DIY projects, recipes, free desktop wallpapers and more!</p>
+    <p><a href="about">Find out more about me here</a>.</p></p>
 
 	<ul class="list-social list-inline">
 		<a href="http://www.instagram.com/zabbyallen"><li><i class="icon-zab fa fa-instagram"></i></li></a>
@@ -21,47 +23,13 @@
     <script src="//instansive.com/widget/js/instansive.js"></script><iframe src="//instansive.com/widgets/c8260fb9300162f8b693275610a5e4c747e373c4.html" id="instansive_c8260fb930" name="instansive_c8260fb930"  scrolling="no" allowtransparency="true" class="instansive-widget" style="width: 100%; border: 0; overflow: hidden;"></iframe>
 </div>
 
-{% if config.plugins.relatedpages.enabled and related_pages|length > 0 %}
-    <h4>Related Posts</h4>
-    {% include 'partials/relatedpages.html.twig' %}
-{% endif %}
-{% if config.plugins.random.enabled %}
-<div class="sidebar-content">
-	<h4>Random Article</h4>
-	<a class="button" href="{{ base_url }}/random"><i class="fa fa-retweet"></i> I'm Feeling Lucky!</a>
-</div>
-{% endif %}
-{% if config.plugins.taxonomylist.enabled %}
-<div class="sidebar-content">
-    <h4>Tags</h4>
-    {% include 'partials/taxonomylist.html.twig' with {'base_url':new_base_url, 'taxonomy':'tag'} %}
-</div>
-{% endif %}
-<!--
-<div class="sidebar-content syndicate">
-    <h4>Etsy</h4>
-   <script type='text/javascript' src='https://www.etsy.com/assets/js/etsy_mini_shop.js'></script><script type='text/javascript'>new Etsy.Mini(7532587,'thumbnail',3,3,0,'https://www.etsy.com');</script>
-</div>
--->
-
-{% if config.plugins.simplesearch.enabled %}
-<div class="sidebar-content">
-    <h4>Search for stuff</h4>
-    {% include 'partials/simplesearch_searchbox.html.twig' %}
-</div>
-{% endif %}
-{% if config.plugins.archives.enabled %}
-
-<div class="sidebar-content">
-    <h4>Archives</h4>
-	{% include 'partials/archives.html.twig' with {'base_url':new_base_url} %}
-</div>
+{% if page.name == 'blog.md' %}
+{% include 'partials/sidebar-lower.html.twig' %}
 {% endif %}
 
-{% if config.plugins.feed.enabled %}
-<div class="sidebar-content syndicate">
-    <h4>Syndicate</h4>
-    <a class="button" href="{{ feed_url }}.atom"><i class="fa fa-rss-square"></i> Atom 1.0</a>
-    <a class="button" href="{{ feed_url }}.rss"><i class="fa fa-rss-square"></i> RSS</a>
-</div>
+{% if config.plugins.simplecontact.enabled %}
+yea co
+{% include 'partials/simplecontact.html.twig' %}
 {% endif %}
+
+
