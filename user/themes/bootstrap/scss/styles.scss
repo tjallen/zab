@@ -363,9 +363,14 @@ div.hero {
 		position: center center;
 		color: $col-coral;
 	}
-	h1, h2 {
+	h1, h2.slogan {
 		@include textshadow;
 		color: #fff;
+	}
+	h2.slogan {
+		@include azo;
+		font-weight: bold;
+		font-size: 0.9rem;
 	}
 	//background:  
 		// url(../../pages/images/pink-bg-border.png) bottom center repeat-x,  /* On top,    like z-index: 4; */

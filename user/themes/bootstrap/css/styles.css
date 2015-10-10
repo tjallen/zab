@@ -249,9 +249,13 @@ div.hero {
   background-repeat: no-repeat;
   background-position: center center;
   background-color: #F59DA3; }
-  div.hero h1, div.hero h2 {
+  div.hero h1, div.hero h2.slogan {
     text-shadow: 0 1px 0 #313131;
     color: #fff; }
+  div.hero h2.slogan {
+    font-family: "azo-sans-web";
+    font-weight: bold;
+    font-size: 0.9rem; }
 
 .blog-header-image .blog-header-image-inner {
   margin: 0 auto;
