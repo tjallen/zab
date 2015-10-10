@@ -14,6 +14,11 @@
 
 
     {% block stylesheets %}
+        {% do assets.addCss('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic') %}
+        {% do assets.add('theme://css/bootstrap.min.css',101) %}
+        {% do assets.add('theme://css/styles.css',100) %}
+        {% do assets.addCss('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css') %}
+
         {% if browser.getBrowser == 'msie' and browser.getVersion >= 8 and browser.getVersion <= 9 %}
             {% do assets.addJs('theme://js/html5shiv-printshiv.min.js') %}
         {% endif %}
@@ -24,15 +29,6 @@
         {% do assets.addJs('theme://js/modernizr.custom.71422.js',100) %}
     {% endblock %}
     {{ assets.js() }}
-
-    <!-- for merge later -->
-    <link rel="stylesheet" href="/gravzab/user/themes/bootstrap/css/bootstrap.min.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Oswald:400,700|Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/gravzab/user/themes/bootstrap/css/styles.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-    <!-- / -->
 
 {% endblock head%}
 
@@ -78,9 +74,12 @@
     {% block bottom %}
 
     {% endblock %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+    <!-- typekit -->
     <script src="https://use.typekit.net/fuy8fju.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <!-- jq + bs.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+
 </body>
 </html>
