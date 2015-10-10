@@ -1,0 +1,22 @@
+title: 'Zabby Allen - The girl with all the craft supplies'
+author:
+  name: 'Zabby Allen'
+  email: zabbyallen@gmail.com
+taxonomies:
+  - category
+  - tag
+metadata:
+  description: 'Zabby Allen - The girl with all the craft supplies'
+summary:
+  enabled: false
+  format: short
+  size: 300
+  delimiter: '==='
+redirects:
+  /redirect-test: /
+  '/old/(.*)': /new/$1
+routes:
+  /something/else: /blog/sample-3
+  '/new/(.*)': /blog/$1
+blog:
+  route: /blog

@@ -1,0 +1,362 @@
+/*
+fixed header
+nav
+blog tags + date laouyt
+h1 h2 centre
+tags, syndicate styling
+archives styling
+.syndicate a {
+  margin-bottom: 1rem; }
+footer centre
+#footer {
+  position: absolute;
+  background: #333;
+  height: 6rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: #999;
+  text-align: center; }
+  #footer a:hover {
+    color: #fff; }
+  #footer .totop {
+    position: absolute;
+    bottom: 5rem;
+    text-align: center;
+    left: 0;
+    right: 0; }
+    #footer .totop span {
+      font-size: 1.7rem;
+      line-height: 2.5rem;
+      background: #333;
+      width: 3rem;
+      height: 2rem;
+      border-radius: 3px;
+      display: inline-block;
+      text-align: top; }
+  #footer p {
+    margin: 0; }
+    #footer p .fa {
+      color: #fff; }
+
+/* Contain floats *and margins*. */
+.cfm:before,
+.cfm:after {
+  content: ' ';
+  display: table; }
+
+.cfm:after {
+  clear: both; }
+
+a {
+  color: #69D0FD; }
+  a:hover {
+    color: #F59DA3; }
+
+html, body, button, input, select, textarea, .pure-g, .pure-g [class*="pure-u"] {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400; }
+
+body {
+  background-color: #FFFFFF;
+  margin: 0; }
+
+table thead {
+  background-color: #dedede; }
+
+table tr th, table tr td {
+  padding: 6px 13px;
+  border: 1px solid #ddd; }
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -1px;
+  clear: both;
+  font-weight: 400;
+  text-rendering: optimizeLegibility; }
+
+h1 {
+  font-family: "azo-sans-web";
+  font-weight: 700; }
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.6rem; }
+
+h3 {
+  font-size: 1.3rem;
+  line-height: 1.4rem; }
+
+h4 {
+  font-size: 1.1rem;
+  line-height: 1.2rem; }
+
+.mobile {
+  display: none; }
+
+p {
+  margin: 0.5rem 0 1.3rem;
+  color: #7D7D7D; }
+
+ul {
+  -webkit-margin-before: 0;
+  -webkit-padding-before: 0;
+  -webkit-padding-start: 0; }
+  ul li {
+    list-style-type: none; }
+
+h1, h2, h4 {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center; }
+
+nav.navbar {
+  /*background:  
+	   url(../../pages/images/pink-bg-tile.png) center center; */ }
+  nav.navbar button.navbar-toggler {
+    color: #CBEFFF; }
+  nav.navbar ul.navbar-nav {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center; }
+    nav.navbar ul.navbar-nav li.nav-item {
+      margin: 0;
+      float: none;
+      display: block;
+      *display: inline;
+      /* ie7 */
+      *zoom: 1;
+      /* hasLayout ie7 */
+      vertical-align: top; }
+      nav.navbar ul.navbar-nav li.nav-item a.nav-link {
+        color: #CBEFFF;
+        text-transform: uppercase;
+        font-weight: bold; }
+
+div#navbar li a:hover {
+  color: #facbce;
+  background-color: #f5a2a7; }
+
+div#navbar li.active a {
+  color: #facbce; }
+
+div#listing {
+  padding-top: 15px;
+  padding-bottom: 15px; }
+  div#listing img {
+    display: block;
+    max-width: 100%;
+    height: auto; }
+  div#listing h2 {
+    text-align: left;
+    font-family: "azo-sans-web";
+    text-transform: uppercase;
+    font-weight: 500; }
+
+div#sidebar {
+  text-align: center; }
+  div#sidebar div.sidebar-header {
+    border-top: 3px solid #dedede;
+    padding-top: 15px;
+    padding-bottom: 15px; }
+    div#sidebar div.sidebar-header img.smile {
+      width: 100%;
+      height: auto;
+      max-width: 12rem; }
+  div#sidebar div.sidebar-content {
+    margin-bottom: 1.5rem; }
+    div#sidebar div.sidebar-content h4 {
+      margin: 0.4rem 0; }
+    div#sidebar div.sidebar-content span.tags a, div#sidebar div.sidebar-content a.button {
+      font-family: "azo-sans-web";
+      display: block;
+      border-radius: 0;
+      background-color: #69D0FD;
+      border: none;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 0.2rem;
+      letter-spacing: 1px; }
+      div#sidebar div.sidebar-content span.tags a:hover, div#sidebar div.sidebar-content a.button:hover {
+        background-color: #F59DA3;
+        color: #fff;
+        text-decoration: none; }
+    div#sidebar div.sidebar-content span.label {
+      background-color: #69D0FD; }
+    div#sidebar div.sidebar-content ul.archives {
+      padding: 0; }
+      div#sidebar div.sidebar-content ul.archives span.archive_entry {
+        font-family: "azo-sans-web";
+        display: block;
+        border-radius: 0;
+        background-color: #69D0FD;
+        border: none;
+        color: #fff;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 0.2rem;
+        letter-spacing: 1px; }
+        div#sidebar div.sidebar-content ul.archives span.archive_entry:hover {
+          background-color: #F59DA3;
+          color: #fff;
+          text-decoration: none; }
+
+header.scrolled div#navbar ul.navigation {
+  border-bottom: none !important;
+  background: transparent !important;
+  padding: 0.5rem !important; }
+
+#header #navbar ul.navigation {
+  display: inline-block;
+  float: none;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 0.5rem; }
+  #header #navbar ul.navigation li {
+    float: none;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px; }
+
+li.active a {
+  color: #000; }
+
+header#header.scrolled {
+  margin-top: 0; }
+
+section#body {
+  padding-top: 9rem; }
+  section#body.header-image {
+    padding-top: 0; }
+
+.paperborder {
+  /*
+	background: {
+		image: url(../../pages/images/pink-bg-border.png);
+		size: inherit;
+		repeat-x: repeat;
+		repeat-y: no-repeat;
+		position: bottom;
+	}*/ }
+
+div.hero {
+  background-color: #F59DA3; }
+
+.blog-header-image .blog-header-image-inner {
+  margin: 0 auto;
+  padding-bottom: 5rem;
+  text-transform: uppercase; }
+  .blog-header-image .blog-header-image-inner h1, .blog-header-image .blog-header-image-inner h2 {
+    color: #fff; }
+  .blog-header-image .blog-header-image-inner h2.slogan {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px; }
+
+.header-image #body .flush-top {
+  padding: 0;
+  margin: 0; }
+
+span.tags a {
+  background-color: #69D0FD;
+  display: inline-block;
+  border: none;
+  border-radius: 0;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  margin: 0.2rem;
+  background-color: #EFFAFF; }
+  span.tags a:hover {
+    background-color: #F59DA3;
+    color: #fff;
+    text-decoration: none; }
+
+ul.list-social {
+  text-align: center;
+  padding-left: 0; }
+  ul.list-social li {
+    list-style-type: none;
+    display: inline;
+    margin: 5px; }
+    ul.list-social li i {
+      background-color: #69D0FD;
+      color: #fff;
+      padding: 4px 5px 3px 5px;
+      font-size: 20px;
+      border-radius: 30px;
+      -webkit-border-radius: 30px;
+      -moz-border-radius: 30px; }
+      ul.list-social li i:hover {
+        background-color: #F59DA3;
+        color: #fff;
+        text-decoration: none; }
+
+div.content-wrapper {
+  margin-top: 3rem; }
+
+footer {
+  background-color: #F59DA3;
+  color: #fff;
+  position: relative;
+  margin-top: 3rem;
+  padding: 1.5rem; }
+  footer a {
+    color: #1281B1; }
+
+@media (min-width: 48em) {
+  nav.navbar ul.navbar-nav li.nav-item {
+    display: inline-block;
+    margin: 0.1rem; }
+    nav.navbar ul.navbar-nav li.nav-item a {
+      padding: 0.6rem; }
+  h2 {
+    font-size: 1.75rem; }
+  h3 {
+    font-size: 1.5rem; }
+  h4 {
+    font-size: 1.25rem; } }
+
+header#header {
+  position: inherit;
+  height: auto; }
+
+/*
+p.mobile {
+	margin-bottom: 0;
+	color: $col-art;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.mobile {
+	display: block;
+	padding: 0 10px;
+	text-align: center;
+}
+.tagline {
+	display: none;
+}*/
+.list-item {
+  margin-bottom: 3rem; }
+  .list-item span.tags {
+    float: left; }
+  .list-item span.list-blog-date span {
+    font-family: "azo-sans-web";
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #dedede;
+    float: left;
+    margin-left: 0.1rem; }
+  .list-item span.list-blog-date em {
+    border: none; }
+  .list-item div.list-blog-padding ul li:nth-of-type(odd) {
+    background-color: #fef0f1; }
+  .list-item div.list-blog-padding ul li:nth-of-type(even) {
+    background-color: #fefafa; }
+  .list-item div.list-blog-padding ul li {
+    padding: 0.4rem 0.8rem; }

@@ -1,0 +1,57 @@
+{% embed 'partials/base.html.twig' %}
+
+	{% set collection = page.collection() %}
+
+	{% block content %}
+		{% set blog_image = page.media.images|first %}
+
+		{% if blog_image %}
+		<div class="flush-top blog-header blog-header-image paperborder">
+			<div class="blog-header-image-inner">
+		<!-- <div class="flush-top blog-header blog-header-image" style="background-image: url({{ blog_image.url }});"> -->
+		{% else %}
+			<div class="blog-header">
+		{% endif %}
+			<!--
+				{{ page.content }}
+			-->
+
+				<h1>Zabby Allen</h1>
+
+				<h2 class="slogan">The girl with all the craft supplies</h2>
+
+			</div>
+		</div> <!-- /header-image -->
+
+		</div><!-- /hero (base)-->
+
+	<div class="container">
+
+<!--
+			{% if config.plugins.breadcrumbs.enabled %}
+				{% include 'partials/breadcrumbs.html.twig' %}
+			{% endif %} -->
+
+
+
+		<div class="content-wrapper blog-content-list grid pure-g">
+			<div id="listing" class="col-md-8">
+				{% for child in collection %}
+			        {% include 'partials/blog_item.html.twig' with {'blog':page, 'page':child, 'truncate':true} %}
+			    {% endfor %}
+
+                {% if config.plugins.pagination.enabled and collection.params.pagination %}
+                    {% include 'partials/pagination.html.twig' with {'base_url':page.url, 'pagination':collection.params.pagination} %}
+                {% endif %}
+			</div>
+			<div id="sidebar" class="col-md-4">
+				{% include 'partials/sidebar.html.twig' with {'blog':page} %}
+			</div>
+		</div>
+
+		</div> <!-- /container -->
+	{% endblock %}
+
+{% endembed %}
+
+
