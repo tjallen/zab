@@ -11,8 +11,6 @@
     <link rel="icon" type="image/png" href="{{ url('theme://images/favicon.ico') }}" />
     <link rel="canonical" href="{{ page.url(true, true) }}" />
 
-
-
     {% block stylesheets %}
         {% do assets.addCss('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic') %}
         {% do assets.add('theme://css/bootstrap.min.css',101) %}
@@ -25,11 +23,6 @@
     {% endblock %}
     {{ assets.css() }}
 
-    {% block javascripts %}
-        {% do assets.addJs('theme://js/modernizr.custom.71422.js',100) %}
-    {% endblock %}
-    {{ assets.js() }}
-
 {% endblock head%}
 
 
@@ -38,26 +31,8 @@
 <body id="top" class="{{ page.header.body_classes }}">
 
     <div id="sb-site">
-        <div class="hero">
-        {% block header %}
-        <header id="header">
-        	<!--
-            <div id="logo">
-                <h3><a href="{{ base_url == '' ? '/' : base_url }}">{{ config.site.title }}</a></h3>
-            </div>
-        -->
-            <div id="navbar">
-                {% block header_extra %}{% endblock %}
-                {% if config.plugins.langswitcher.enabled %}
-                {% include 'partials/langswitcher.html.twig' %}
-                {% endif %}
-                {% block header_navigation %}
-                {% include 'partials/navigation.html.twig' %}
-                {% endblock %}
-            </div>
-
-        </header>
-        {% endblock %}
+        
+        {% include 'partials/hero.html.twig' %}
         
         {% block body %}
         <section id="body" class="{{ page.header.body_classes }}">
@@ -77,9 +52,13 @@
     <!-- typekit -->
     <script src="https://use.typekit.net/fuy8fju.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    <!-- jq + bs.js -->
+    <!-- jq -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+    {% block javascripts %}
+        {% do assets.addJs('theme://js/bootstrap.min.js',101) %}
+        {% do assets.addJs('theme://js/modernizr.custom.71422.js',100) %}
+    {% endblock %}
+    {{ assets.js() }}
 
 </body>
 </html>

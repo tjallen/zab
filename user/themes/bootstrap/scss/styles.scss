@@ -26,6 +26,14 @@ $pink: #f1979a;
 	}
 }
 
+@mixin textshadow {
+	text-shadow: 0 1px 0 #313131;
+}
+
+@mixin overlay {
+	background-color: rgba(36, 36, 36, 0.10);
+}
+
 // template salvage
 
 /*
@@ -182,6 +190,7 @@ nav.navbar {
 				color: $col-blu-light;
 				text-transform: uppercase;
 				font-weight: bold;
+				@include textshadow;
 			}
 		}
 	}
@@ -193,7 +202,8 @@ div#navbar {
 			//color: #fff;
 			&:hover {
 				color: lighten($col-coral, 10%);
-				background-color: lighten($col-coral, 1%);
+				@include overlay;
+				//background-color: lighten($col-coral, 1%);
 			}
 		}
 
@@ -331,10 +341,7 @@ header#header.scrolled {
 }
 
 section#body {
-	padding-top: 9rem;
-	&.header-image {
-		padding-top: 0;
-	}
+	padding-top: 6rem;
 }
 
 .paperborder {
@@ -350,7 +357,16 @@ section#body {
 }
 
 div.hero {
-	background-color: $col-coral;
+	background: {
+		size: cover;
+		repeat: no-repeat;
+		position: center center;
+		color: $col-coral;
+	}
+	h1, h2 {
+		@include textshadow;
+		color: #fff;
+	}
 	//background:  
 		// url(../../pages/images/pink-bg-border.png) bottom center repeat-x,  /* On top,    like z-index: 4; */
 		// url(../../pages/images/pink-bg-tile.png) center center;
@@ -359,11 +375,9 @@ div.hero {
 .blog-header-image {
 	.blog-header-image-inner {
 		margin: 0 auto;
-		padding-bottom: 5rem;
+		padding: 2rem 0 5rem;
 		text-transform: uppercase;
-		h1, h2 {
-			color: #fff;
-		}
+
 		h2.slogan {
 			text-transform: uppercase;
 			font: {
@@ -415,10 +429,6 @@ ul.list-social {
 			@include hoverstate;
 		}
 	}
-}
-
-div.content-wrapper {
-	margin-top: 3rem;
 }
 
 footer {

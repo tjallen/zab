@@ -1,19 +1,14 @@
 
 
-{% set collection = page.collection() %}
-
-
-
-{% block content %}
-
+{% set blog_image = page.media.images|first %}
+{% if blog_image %}
+<div class="hero" style="background-image: url({{ blog_image.url }});">
+{% else %}
 <div class="hero">
+{% endif %}
+
 {% block header %}
 <header id="header">
-	<!--
-    <div id="logo">
-        <h3><a href="{{ base_url == '' ? '/' : base_url }}">{{ config.site.title }}</a></h3>
-    </div>
--->
     <div id="navbar">
         {% block header_extra %}{% endblock %}
         {% if config.plugins.langswitcher.enabled %}
@@ -25,25 +20,17 @@
     </div>
 
 </header>
-	{% set blog_image = page.media.images|first %}
+{% endblock %}
 
-	{% if blog_image %}
-	<div class="flush-top blog-header blog-header-image paperborder">
-		<div class="blog-header-image-inner">
-	<!-- <div class="flush-top blog-header blog-header-image" style="background-image: url({{ blog_image.url }});"> -->
-	{% else %}
-		<div class="blog-header">
-	{% endif %}
-		<!--
-			{{ page.content }}
-		-->
+<div class="flush-top blog-header blog-header-image"> 
 
-			<h1>Zabby Allen</h1>
+	<div class="blog-header-image-inner">
 
-			<h2 class="slogan">The girl with all the craft supplies</h2>
+		<h1>Zabby Allen</h1>
 
-		</div>
-	</div> <!-- /header-image -->
+		<h2 class="slogan">The girl with all the craft supplies</h2>
 
-	</div><!-- /hero (base)-->
+	</div>
+</div> <!-- /header-image -->
 
+</div><!-- /hero (base)-->
