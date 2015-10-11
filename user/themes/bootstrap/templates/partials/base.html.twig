@@ -23,6 +23,9 @@
     {% endblock %}
     {{ assets.css() }}
 
+    <!-- jq -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
 {% endblock head%}
 
 
@@ -54,13 +57,28 @@
     <!-- typekit -->
     <script src="https://use.typekit.net/fuy8fju.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    <!-- jq -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
     {% block javascripts %}
         {% do assets.addJs('theme://js/bootstrap.min.js',101) %}
         {% do assets.addJs('theme://js/modernizr.custom.71422.js',100) %}
     {% endblock %}
     {{ assets.js() }}
+
+    {% if config.plugins.simplesearch.enabled %}
+    <script>
+    jQuery(document).ready(function($){
+        var input = $('[data-search-input]');
+
+        input.on('keypress', function(event) {
+            if (event.which == 13 && input.val().length > 3) {
+                event.preventDefault();
+                window.location.href = input.data('search-input') + '{{ config.system.param_sep }}' + input.val();
+            }
+        });
+    });
+    </script>
+    {% endif %}
+    <script src="//instansive.com/widget/js/instansive.js"></script>
 
 </body>
 </html>

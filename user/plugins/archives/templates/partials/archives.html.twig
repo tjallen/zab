@@ -4,9 +4,9 @@
     <li>
     	<a href="{{ base_url }}/archives_month{{ config.system.param_sep }}{{ month|date('M_Y')|lower|e('url') }}">
         {% if archives_show_count %}
-        <span class="label">{{ items|length }}</span>
+        <span class="label">{{ items|length }}eu</span>
         {% endif %}
-        <span class="archive_date">{{ month }}</span>
+        <span class="archive_date">{{ month }}eu</span>
         </a>
     </li>
 {% endfor %}
