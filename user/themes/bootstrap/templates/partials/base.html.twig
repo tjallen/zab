@@ -38,7 +38,7 @@
         {% include 'partials/hero.html.twig' %}
         
         {% block body %}
-        <section id="body" class="{{ page.header.body_classes }}">
+        <section id="body" class="container {{ page.header.body_classes }}">
             {% block content %}{% endblock %}
         </section>
         {% endblock %}

@@ -2,14 +2,10 @@
 {% set collection = page.collection() %}
 {% block content %}
 
-	<div class="container">
-
-<!--
+{#
 			{% if config.plugins.breadcrumbs.enabled %}
 				{% include 'partials/breadcrumbs.html.twig' %}
-			{% endif %} -->
-
-
+			{% endif %} #}
 
 		<div class="content-wrapper blog-content-list grid pure-g">
 			<div id="listing" class="col-md-8">
@@ -17,16 +13,15 @@
 			        {% include 'partials/blog_item.html.twig' with {'blog':page, 'page':child, 'truncate':true} %}
 			    {% endfor %}
 
-                {% if config.plugins.pagination.enabled and collection.params.pagination %}
-                    {% include 'partials/pagination.html.twig' with {'base_url':page.url, 'pagination':collection.params.pagination} %}
-                {% endif %}
+          {% if config.plugins.pagination.enabled and collection.params.pagination %}
+              {% include 'partials/pagination.html.twig' with {'base_url':page.url, 'pagination':collection.params.pagination} %}
+          {% endif %}
 			</div>
 			<div id="sidebar" class="col-md-4">
 				{% include 'partials/sidebar.html.twig' with {'blog':page} %}
 			</div>
 		</div>
 
-		</div> <!-- /container -->
 	{% endblock %}
 
 {% endembed %}

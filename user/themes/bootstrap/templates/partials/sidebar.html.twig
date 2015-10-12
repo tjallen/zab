@@ -5,11 +5,15 @@
 <div class="sidebar-header">
 
 <a href="about">
-	<img src="./images/circle-portrait-materials-blue.png" alt="" class="smile">
+	<img src="/user/pages/images/circle-portrait-materials-blue.png" alt="" class="smile">
 </a>
 
+    {% if page.name == 'about.md' %}
+    <p>Fun DIYs, recipes and freebies from the girl with all the craft supplies. Connect with me on my social media pages below...</p>
+    {% else %}
 	<p>My name is Zabby Allen and I am a craft hoarder. Follow along for fun DIY projects, recipes, free desktop wallpapers and more!</p>
     <p><a href="about">Find out more about me here</a>.</p></p>
+    {% endif %}
 
 	<ul class="list-social list-inline">
 		<a href="http://www.instagram.com/zabbyallen"><li><i class="icon-zab fa fa-instagram"></i></li></a>
@@ -23,13 +27,9 @@
     <iframe src="//instansive.com/widgets/c8260fb9300162f8b693275610a5e4c747e373c4.html" id="instansive_c8260fb930" name="instansive_c8260fb930"  scrolling="no" allowtransparency="true" class="instansive-widget" style="width: 100%; border: 0; overflow: hidden;"></iframe>
 </div>
 
-{% if page.name == 'blog.md' %}
+{% if page.title == 'Home' or page.name == 'item.md' %}
 {% include 'partials/sidebar-lower.html.twig' %}
 {% endif %}
 
-{% if config.plugins.simplecontact.enabled %}
-yea co
-{% include 'partials/simplecontact.html.twig' %}
-{% endif %}
 
 

@@ -21,12 +21,12 @@
 
 
 
-        {% if big_header %}
-            <!--{{ page.media.images|first.cropResize(900,600).html }}-->
+       {# {% if big_header %}
+            {{ page.media.images|first.cropResize(900,600).html }}
         {% else %}
-            <!--{{ page.media.images|first.cropZoom(900,300).html }}-->
-        {% endif %}
-
+            {{ page.media.images|first.cropZoom(900,300).html }}
+        {% endif %} #}
+        
     </div>
 
     <div class="list-blog-padding">
@@ -45,7 +45,7 @@
         {% else %}
             <p>{{ page.content }}</p>
         {% endif %}
-        <!--<p><a href="{{ page.url }}">Continue Reading...</a></p>-->
+        {# <p><a href="{{ page.url }}">Continue Reading...</a></p> #}
     {% else %}
         <p>{{ page.content }}</p>
         {% set show_prev_next = true %}
