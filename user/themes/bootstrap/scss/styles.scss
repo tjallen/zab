@@ -9,6 +9,13 @@ $col-art: #7697AD;
 $col-coral: #F59DA3;
 $pink: #f1979a;
 
+.wf-loading {
+	h1, h2.slogan, h2 {
+		visibility: hidden!important;
+	}
+	
+}
+
 @mixin azo {
 	font-family: "azo-sans-web", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -260,7 +267,7 @@ div#listing {
 div#sidebar {
 	text-align: center;
 	div.sidebar-header {
-		border-top: 3px solid $col-gray;
+		border-top: 3px solid $col-coral;
 		padding: {
 			top: 15px;
 			bottom: 15px;

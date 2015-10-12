@@ -3,4 +3,4 @@ title: Contact
 ---
 # Get in touch
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor exercitationem voluptatum voluptas accusamus est animi corporis dolore a, libero eligendi blanditiis, praesentium, similique nihil ratione.
+Got a question? Interested in collaborating? Just fancy a chat? Whatever your query I'd love to hear from you! Fill out the contact form below or email me at [zabbyallen at gmail.com](mailto:zabbyallen@gmail.com)

@@ -1,7 +1,6 @@
 ---
 title: About
 ---
-# About me
 
 My name is Zabby Allen and I'm addicted to craft supplies. Do you have several drawers solely dedicated to ribbons or a collection of tin cans that you'll “use for a project one day”? Sounds like you're addicted too! 
 

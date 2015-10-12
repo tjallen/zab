@@ -1,3 +1,6 @@
+.wf-loading h1, .wf-loading h2.slogan, .wf-loading h2 {
+  visibility: hidden !important; }
+
 /*
 fixed header
 nav
@@ -174,7 +177,7 @@ div#listing {
 div#sidebar {
   text-align: center; }
   div#sidebar div.sidebar-header {
-    border-top: 3px solid #dedede;
+    border-top: 3px solid #F59DA3;
     padding-top: 15px;
     padding-bottom: 15px; }
     div#sidebar div.sidebar-header img.smile {
