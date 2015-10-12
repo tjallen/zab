@@ -71,7 +71,7 @@ button.btn-default {
     background-color: #F59DA3; }
 
 html, body, button, input, select, textarea, .pure-g, .pure-g [class*="pure-u"] {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Source Sans Pro', Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
   font-weight: 400; }
 
 body {
@@ -92,7 +92,7 @@ h1, h2, h3, h4, h5, h6 {
   text-rendering: optimizeLegibility; }
 
 h1 {
-  font-family: "azo-sans-web";
+  font-family: "azo-sans-web", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700; }
 
 h2 {
@@ -157,16 +157,17 @@ div#navbar li a:hover {
 div#navbar li.active a {
   color: #facbce; }
 
+.responsive img {
+  display: block;
+  max-width: 100%;
+  height: auto; }
+
 div#listing {
   padding-top: 15px;
   padding-bottom: 15px; }
-  div#listing img {
-    display: block;
-    max-width: 100%;
-    height: auto; }
   div#listing h2 {
     text-align: left;
-    font-family: "azo-sans-web";
+    font-family: "azo-sans-web", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     font-weight: 500; }
 
@@ -189,7 +190,7 @@ div#sidebar {
     div#sidebar div.sidebar-content ul.archives {
       padding: 0; }
       div#sidebar div.sidebar-content ul.archives span.archive_entry {
-        font-family: "azo-sans-web";
+        font-family: "azo-sans-web", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
         display: block;
         border-radius: 0;
         background-color: #69D0FD;
@@ -252,7 +253,7 @@ div.hero {
     text-shadow: 0 1px 0 #313131;
     color: #fff; }
   div.hero h2.slogan {
-    font-family: "azo-sans-web";
+    font-family: "azo-sans-web", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     font-size: 0.9rem; }
 
@@ -499,7 +500,7 @@ p.mobile {
   .list-item span.tags {
     float: left; }
   .list-item span.list-blog-date span {
-    font-family: "azo-sans-web";
+    font-family: "azo-sans-web", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
     text-transform: uppercase;
     color: #dedede;
@@ -518,7 +519,11 @@ blockquote p {
   border-left: 3px solid #F59DA3;
   padding-left: 1rem; }
 
-p.prev-next {
+.prev-next {
   clear: both;
   text-align: center;
   padding-top: 3rem; }
+  .prev-next a.button:nth-child(1) {
+    float: left; }
+  .prev-next a.button:nth-child(2) {
+    float: right; }

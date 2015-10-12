@@ -10,13 +10,11 @@ $col-coral: #F59DA3;
 $pink: #f1979a;
 
 @mixin azo {
-	font-family: "azo-sans-web";
-	// todo: create stack
+	font-family: "azo-sans-web", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 @mixin source {
-	font-family: 'Source Sans Pro', sans-serif;
-	// td stack
-}
+	font-family: 'Source Sans Pro', Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+} 
 
 @mixin hoverstate {
 	&:hover {
@@ -236,12 +234,15 @@ div#navbar {
 	}
 }
 
-div#listing {
+.responsive {
 	img {
 		display: block;
 		max-width: 100%;
 		height: auto;
 	}
+}
+
+div#listing {
 	h2 {
 		text-align: left;
 		@include azo;
@@ -742,10 +743,18 @@ blockquote p {
 	padding-left: 1rem;
 }
 
-p.prev-next {
+.prev-next {
 	clear: both;
 	text-align: center;
 	padding-top: 3rem;
+	a.button {
+		&:nth-child(1) {
+		float: left;
+		}
+		&:nth-child(2) {
+			float: right;
+		}
+	}
 }
 
 div.wrapperino {
