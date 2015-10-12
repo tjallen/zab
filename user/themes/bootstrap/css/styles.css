@@ -184,24 +184,6 @@ div#sidebar {
     margin-bottom: 1.5rem; }
     div#sidebar div.sidebar-content h4 {
       margin: 0.4rem 0; }
-    div#sidebar div.sidebar-content span.tags a, div#sidebar div.sidebar-content a.button {
-      font-family: "azo-sans-web";
-      display: block;
-      border-radius: 0;
-      background-color: #69D0FD;
-      border: none;
-      color: #fff;
-      padding: 8px 12px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 0.2rem;
-      letter-spacing: 1px; }
-      div#sidebar div.sidebar-content span.tags a:hover, div#sidebar div.sidebar-content a.button:hover {
-        background-color: #F59DA3;
-        color: #fff;
-        text-decoration: none; }
     div#sidebar div.sidebar-content span.label {
       background-color: #69D0FD; }
     div#sidebar div.sidebar-content ul.archives {
@@ -288,6 +270,7 @@ div.hero {
   margin: 0; }
 
 span.tags a {
+  text-transform: uppercase;
   background-color: #69D0FD;
   display: inline-block;
   border: none;
@@ -422,6 +405,9 @@ ul.archive-plus {
   margin-left: .1em;
   margin-left: .1rem; }
 
+.archive-plus label:hover:after {
+  color: #F59DA3; }
+
 .archive-plus li > input ~ .archive-label:after,
 .archive-plus label:after {
   font-family: FontAwesome;
@@ -444,16 +430,15 @@ ul.archive-plus {
   margin-right: .35rem; }
 
 footer#footer {
-  background-color: #F59DA3;
-  color: #fff;
   position: relative;
   margin-top: 3rem;
   padding: 1.5rem;
-  text-align: center; }
-  footer#footer p {
-    color: #fff; }
-  footer#footer a {
-    color: #1281B1; }
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9rem; }
+  footer#footer div.col-md-8 {
+    border-top: 3px solid #F59DA3;
+    padding-top: 2rem; }
 
 @media (min-width: 34em) {
   nav.navbar ul.navbar-nav li.nav-item {
@@ -528,3 +513,12 @@ p.mobile {
     background-color: #fefafa; }
   .list-item div.list-blog-padding ul li {
     padding: 0.4rem 0.8rem; }
+
+blockquote p {
+  border-left: 3px solid #F59DA3;
+  padding-left: 1rem; }
+
+p.prev-next {
+  clear: both;
+  text-align: center;
+  padding-top: 3rem; }

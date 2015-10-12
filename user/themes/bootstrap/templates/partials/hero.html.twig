@@ -2,7 +2,10 @@
 
 {% set blog_image = page.media.images|first %}
 {% if blog_image %}
+{#
 <div class="hero" style="background-image: url({{ blog_image.url }});">
+#}
+<div class="hero" style="background-image: url('user/pages/images/paperlayers.jpg')">
 {% else %}
 <div class="hero">
 {% endif %}

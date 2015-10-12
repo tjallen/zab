@@ -275,26 +275,7 @@ div#sidebar {
 		h4 {
 			margin: 0.4rem 0;
 		}
-		span.tags a, a.button {
-			@include hoverstate;
-			@include azo;
-			display: block;
-			border-radius: 0;
-			background-color: $col-blu;
-			border: none;
-			color: #fff;
-			padding: 8px 12px;
-			font: {
-				size: 0.85rem;
-				weight: 500;
-			}
-			text: {
-				transform: uppercase;
-				align: center;
-			}
-			margin-bottom: 0.2rem;
-			letter-spacing: 1px;
-		}
+		
 		span.label {
 			background-color: $col-blu;
 		}
@@ -424,6 +405,7 @@ span.tags {
 		//&:first-child {
 		//	border: 1px solid black;
 		//}
+		text-transform: uppercase;
 		background-color: $col-blu;
 		display: inline-block;
 		border: none;
@@ -567,7 +549,7 @@ ul.archive-plus {
   margin-left: .1rem;
 }
 .archive-plus label:hover:after {
-  //color: #0e6e90;
+  color: $col-coral;
 }
 .archive-plus li > input ~ .archive-label:after,
 .archive-plus label:after {
@@ -595,18 +577,17 @@ ul.archive-plus {
 
 
 footer#footer {
-	background-color: $col-coral;
-	color: #fff;
+	div.col-md-8 {
+		border-top: 3px solid $col-coral;
+		padding-top: 2rem;
+	}
+	
 	position: relative;
 	margin-top: 3rem;
 	padding: 1.5rem;
 	text-align: center;
-	p {
-		color: #fff;
-	}
-	a {
-		color: $col-blu-dark;
-	}
+	font-style: italic;
+	font-size: 0.9rem;
 }
 
 
@@ -755,6 +736,18 @@ p.mobile {
 		}
 	}
 }
+
+blockquote p {
+	border-left: 3px solid $col-coral;
+	padding-left: 1rem;
+}
+
+p.prev-next {
+	clear: both;
+	text-align: center;
+	padding-top: 3rem;
+}
+
 div.wrapperino {
 	//background-image: url('http://zabbyallen.com/site/assets/files/1001/self-960-c.jpg');
 	//background-repeat: no-repeat;
