@@ -4,27 +4,24 @@
 {% set theme_config = attribute(config.themes, config.system.pages.theme) %}
 
 {% block head %}
-    <meta charset="utf-8" />
-    <title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
-    {% include 'partials/metadata.html.twig' %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="{{ url('theme://images/favicon.ico') }}" />
-    <link rel="canonical" href="{{ page.url(true, true) }}" />
+	<meta charset="utf-8" />
+	<title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+	{% include 'partials/metadata.html.twig' %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="{{ url('theme://images/favicon.ico') }}" />
+	<link rel="canonical" href="{{ page.url(true, true) }}" />
 
-    {% block stylesheets %}
-        {% do assets.addCss('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic') %}
-        {% do assets.add('theme://css/bootstrap.min.css',101) %}
-        {% do assets.add('theme://css/styles.css',100) %}
-        {% do assets.addCss('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css') %}
+	{% block stylesheets %}
+		{% do assets.addCss('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic') %}
+		{% do assets.add('theme://css/bootstrap.min.css',101) %}
+		{% do assets.add('theme://css/styles.css',100) %}
+		{% do assets.addCss('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css') %}
 
-        {% if browser.getBrowser == 'msie' and browser.getVersion >= 8 and browser.getVersion <= 9 %}
-            {% do assets.addJs('theme://js/html5shiv-printshiv.min.js') %}
-        {% endif %}
-    {% endblock %}
-    {{ assets.css() }}
-
-    <!-- jq -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		{% if browser.getBrowser == 'msie' and browser.getVersion >= 8 and browser.getVersion <= 9 %}
+			{% do assets.addJs('theme://js/html5shiv-printshiv.min.js') %}
+		{% endif %}
+	{% endblock %}
+	{{ assets.css() }}
 
 {% endblock head%}
 
@@ -33,60 +30,62 @@
 </head>
 <body id="top" class="{{ page.header.body_classes }}">
 
-    <div id="sb-site">
-        
-        {% include 'partials/hero.html.twig' %}
-        
-        {% block body %}
-        <section id="body" class="container {{ page.header.body_classes }}">
-            {% block content %}{% endblock %}
-        </section>
-        {% endblock %}
+	<div id="sb-site">
+		
+		{% include 'partials/hero.html.twig' %}
+		
+		{% block body %}
+		<section id="body" class="container {{ page.header.body_classes }}">
+			{% block content %}{% endblock %}
+		</section>
+		{% endblock %}
 
-        {% block footer %}
-        <footer id="footer" class="clearfix">
-            <div class="col-md-8 col-md-offset-2">
-                <p>All images and text &copy; Zabby Allen unless otherwise noted. If you wish to use an image please credit and link back. <a href="mailto:zabbyallen@gmail.com" class="email">Email me</a> if you wish to feature a whole post. Thanks!</p>
-            </div>
-        </footer>
-        {% endblock %}
-    </div>
-    {% block bottom %}
+		{% block footer %}
+		<footer id="footer" class="clearfix">
+			<div class="col-md-8 col-md-offset-2">
+				<p>All images and text &copy; Zabby Allen unless otherwise noted. If you wish to use an image please credit and link back. <a href="mailto:zabbyallen@gmail.com" class="email">Email me</a> if you wish to feature a whole post. Thanks!</p>
+			</div>
+		</footer>
+		{% endblock %}
+	</div>
+	{% block bottom %}
 
-    {% endblock %}
-    <!-- typekit -->
-    <script>
-      (function(d) {
-        var config = {
-          kitId: 'fuy8fju',
-          scriptTimeout: 3000,
-          async: true
-        },
-        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-      })(document);
-    </script>
+	{% endblock %}
+	<!-- jq -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<!-- typekit -->
+	<script>
+	  (function(d) {
+		var config = {
+		  kitId: 'fuy8fju',
+		  scriptTimeout: 3000,
+		  async: true
+		},
+		h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+	  })(document);
+	</script>
 
-    {% block javascripts %}
-        {% do assets.addJs('theme://js/bootstrap.min.js',101) %}
-        {% do assets.addJs('theme://js/modernizr.custom.71422.js',100) %}
-    {% endblock %}
-    {{ assets.js() }}
+	{% block javascripts %}
+		{% do assets.addJs('theme://js/bootstrap.min.js',101) %}
+		{% do assets.addJs('theme://js/modernizr.custom.71422.js',100) %}
+	{% endblock %}
+	{{ assets.js() }}
 
-    {% if config.plugins.simplesearch.enabled %}
-    <script>
-    jQuery(document).ready(function($){
-        var input = $('[data-search-input]');
+	{% if config.plugins.simplesearch.enabled %}
+	<script>
+	jQuery(document).ready(function($){
+		var input = $('[data-search-input]');
 
-        input.on('keypress', function(event) {
-            if (event.which == 13 && input.val().length > 2) {
-                event.preventDefault();
-                window.location.href = input.data('search-input') + '{{ config.system.param_sep }}' + input.val();
-            }
-        });
-    });
-    </script>
-    {% endif %}
-    <script src="//instansive.com/widget/js/instansive.js"></script>
+		input.on('keypress', function(event) {
+			if (event.which == 13 && input.val().length > 2) {
+				event.preventDefault();
+				window.location.href = input.data('search-input') + '{{ config.system.param_sep }}' + input.val();
+			}
+		});
+	});
+	</script>
+	{% endif %}
+	<script src="//instansive.com/widget/js/instansive.js"></script>
 
 </body>
 </html>

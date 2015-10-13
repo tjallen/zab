@@ -14,7 +14,7 @@ Unfortunately if you're anything like me you're likely to find a potential use f
 
 
 
-![------------------------](../images/hr-pencils.jpg)
+![](../images/hr-pencils.jpg)
 ​
 
 I am a 24 year old South London girl with a love for travel and the outdoors. I trained as a Book Artist & Designer at LCC, graduating in 2013. For my final major project I set up a little pop-up shop selling things I created from my ridiculous collection of craft supplies after reading a book about hoarding and seeing lots of hoarding tendencies in myself. Although the project really only encouraged me to buy more craft supplies (I think I might be beyond help!), I had a lot of fun doing it and was inspired to start this blog.

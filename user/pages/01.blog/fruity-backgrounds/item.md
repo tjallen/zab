@@ -29,18 +29,20 @@ best practice:
 a) never have any spaces in file names, only - or _ & all lowercase
 b) keep it simple: za-watermelon-1680.jpg etc
 -->
-[Large 2560 x 1440](https://www.flickr.com/photos/136775545@N04/22045693726/in/photostream/) | [Medium 1680 x 1050 (Macbook Pro etc)](https://www.flickr.com/photos/136775545@N04/22071877365/in/photostream/) | [Small 1440x900](https://www.flickr.com/photos/136775545@N04/21884978449/in/photostream/) | [iPad and Tablet 1024 x 1024](https://www.flickr.com/photos/136775545@N04/22081869751/in/photostream/) | [Smartphone 640x1136](https://www.flickr.com/photos/136775545@N04/21449024124/in/photostream/)
+[Large 2560 x 1440](http://i.imgur.com/MSt5GbN.jpg) | [Medium 1680 x 1050](http://i.imgur.com/ky1qOUN.jpg) | [Small 1440x900](http://i.imgur.com/LfazJUR.jpg) | [iPad and Tablet 1024 x 1024](http://i.imgur.com/yXM1oxL.jpg) | [Smartphone 640x1136](http://i.imgur.com/blztZh3.jpg)
 
 ## KIWI
 
 ![zabby allen kiwi 1680x1050](zabby-allen-kiwi-1680x1050.jpg)
 
-[Large 2560 x 1440](https://www.flickr.com/photos/136775545@N04/21884010058/in/photostream/) | [Medium 1680 x 1050](https://www.flickr.com/photos/136775545@N04/21883707830/in/photostream/) | [Small 1440x900](https://www.flickr.com/photos/136775545@N04/21449042084/in/photostream/) | [iPad and Tablet 1024 x 1024](https://www.flickr.com/photos/136775545@N04/22081888611/in/photostream/) | [Smartphone 640x1136](https://www.flickr.com/photos/136775545@N04/21884997859/in/photostream/)
+[Large 2560 x 1440](http://i.imgur.com/0vHRPF2.jpg) | [Medium 1680 x 1050](http://i.imgur.com/WxDwcfq.jpg) | [Small 1440x900](http://i.imgur.com/ctQYxpu.jpg) | [iPad and Tablet 1024 x 1024](http://i.imgur.com/q1L7XE6.jpg) | [Smartphone 640x1136](http://i.imgur.com/A5hDGZM.jpg)
 
 ## PINEAPPLE
 
 ![zabby allen pineapple 180x1050](zabby-allen-pineapple-1680x1050.jpg)
 
-[Large 2560 x 1440](https://www.flickr.com/photos/136775545@N04/22081880651/in/photostream/) | [Medium 1680 x 1050](https://www.flickr.com/photos/136775545@N04/22071887815/in/photostream/) | [Small 1440x900](https://www.flickr.com/photos/136775545@N04/21883699630/in/photostream/) | [iPad and Tablet 1024 x 1024](https://www.flickr.com/photos/136775545@N04/22045704896/in/photostream/) | [Smartphone 640x1136](https://www.flickr.com/photos/136775545@N04/21449035504/in/photostream/)
+[Large 2560 x 1440](http://i.imgur.com/YgWP6t5.jpg) | [Medium 1680 x 1050](http://i.imgur.com/3oV3Ais.jpg) | [Small 1440x900](http://i.imgur.com/VeeURCU.jpg) | [iPad and Tablet 1024 x 1024](http://i.imgur.com/5EQFYuT.jpg) | [Smartphone 640x1136](http://i.imgur.com/GfZZjZi.jpg)
 
 Enjoy! 
+
+
