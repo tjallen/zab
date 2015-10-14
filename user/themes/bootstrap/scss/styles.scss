@@ -148,7 +148,7 @@ ul {
 	}
 }
 
-h1, h2, h4 {
+h1, h2 {
 	width: 100%;
 	margin: 0 auto;
 	text-align: center;
@@ -161,7 +161,9 @@ header#header {
 
 nav.navbar {
 	button.navbar-toggler {
-		color: $col-blu-light;
+		@include overlay;
+		color: #fff;
+		border-radius: 0;
 	}
 	ul.navbar-nav {
 		width: 100%;
@@ -346,33 +348,11 @@ div#sidebar {
 		margin-bottom: 1.5rem;
 		h4 {
 			margin: 0.4rem 0;
+			text-align: center;
 		}
 		
 		span.label {
 			background-color: $col-blu;
-		}
-		ul.archives {
-			padding: 0;
-			span.archive_entry {
-				@include hoverstate;
-				@include azo;
-				display: block;
-				border-radius: 0;
-				background-color: $col-blu;
-				border: none;
-				color: #fff;
-				padding: 8px 12px;
-				font: {
-					size: 0.85rem;
-					weight: 500;
-				}
-				text: {
-					transform: uppercase;
-					align: center;
-				}
-				margin-bottom: 0.2rem;
-				letter-spacing: 1px;
-			}
 		}
 	}
 }
@@ -452,6 +432,8 @@ textarea {
 // archives plugin
 ul.archive-plus {
 	text-align: left;
+	width: 70%;
+	margin: 0 auto;
 	.archive-label {
 		color: $col-gray;
 	}
@@ -471,8 +453,8 @@ ul.archive-plus {
 }
 .archive-plus li {
   border-bottom: 0;
-  line-height: 2em;
-  line-height: 2rem;
+  line-height: 1rem;
+  margin: 1rem 0;
 }
 .archive-plus ul {
   margin-left: 1em;
@@ -481,6 +463,9 @@ ul.archive-plus {
 .archive-plus .archive-label ~ ul.last {
   margin-left: 2em;
   margin-left: 2rem;
+  li {
+  	font-size: 0.9rem;
+  }
 }
 .archive-plus ul label.arrows ~ ul {
   margin-left: 1.25em;
