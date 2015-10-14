@@ -6,6 +6,7 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var minifyCss = require('gulp-minify-css');
 
 // Lint Task
 gulp.task('lint', function() {
@@ -14,10 +15,27 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-// Compile Sass
+/* minify css
+gulp.task('minify-css', function() {
+  return gulp.src('css/*.css')
+    .pipe(minifyCss({compatibility: 'ie8'}))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('css'));
+});
+*/
+
+/* Compile Sass - standardo
 gulp.task('sass', function() {
     return gulp.src('scss/*.scss')
         .pipe(sass())
+        .pipe(gulp.dest('css'));
+});*/
+
+// Compile Sass - minified
+gulp.task('sass', function() {
+    return gulp.src('scss/*.scss')
+        .pipe(sass({outputStyle: 'compressed'}))
+        .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('css'));
 });
 
