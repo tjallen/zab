@@ -3,48 +3,58 @@
 {% set show_onpage_menu = header.onpage_menu == true or header.onpage_menu is null %}
 {% macro pageLinkName(text) %}{{ text|lower|replace({' ':'_'}) }}{% endmacro %}
 
+{#
 {% block javascripts %}
-    {% if show_onpage_menu %}
-        {% do assets.add('theme://js/singlePageNav.min.js') %}
-    {% endif %}
-    {{ parent() }}
+		{% if show_onpage_menu %}
+				{% do assets.add('theme://js/singlePageNav.min.js') %}
+		{% endif %}
+		{{ parent() }}
 {% endblock %}
 
 
 {% block bottom %}
-    {{ parent() }}
-    {% if show_onpage_menu %}
-        <script>
-        // singlePageNav initialization & configuration
-        $('#navbar').singlePageNav({
-            offset: $('#header').outerHeight(),
-            filter: ':not(.external)',
-            updateHash: true,
-            currentClass: 'active'
-        });
-        </script>
-    {% endif %}
+		{{ parent() }}
+		{% if show_onpage_menu %}
+				<script>
+				// singlePageNav initialization & configuration
+				$('#navbar').singlePageNav({
+						offset: $('#header').outerHeight(),
+						filter: ':not(.external)',
+						updateHash: true,
+						currentClass: 'active'
+				});
+				</script>
+		{% endif %}
 {% endblock %}
 
 {% block header_navigation %}
-    {% if show_onpage_menu %}
+		{% if show_onpage_menu %}
 
-        {% for module in page.collection() %}
+				{% for module in page.collection() %}
 
-            {% set current_module = (module.active or module.activeChild) ? 'active' : '' %}
-            <li class="{{ current_module }}"><a href="#{{ _self.pageLinkName(module.menu) }}">{{ module.menu }}</a></li>
+						{% set current_module = (module.active or module.activeChild) ? 'active' : '' %}
+						<li class="{{ current_module }}"><a href="#{{ _self.pageLinkName(module.menu) }}">{{ module.menu }}</a></li>
 
-        {% endfor %}
+				{% endfor %}
 
-    {% else %}
-        {{  parent() }}
-    {% endif %}
+		{% else %}
+				{{  parent() }}
+		{% endif %}
 {% endblock %}
+#}
 
 {% block content %}
-    {{ page.content }}
-    {% for module in page.collection() %}
-        <div id="{{ _self.pageLinkName(module.menu) }}"></div>
-        {{ module.content }}
-    {% endfor %}
+<div class="row">
+	<div class="col-md-8 responsive">
+		{{ page.content }}
+		{% for module in page.collection() %}
+			<div id="{{ _self.pageLinkName(module.menu) }}"></div>
+			{{ module.content }}
+		{% endfor %}
+	</div>
+	<div id="sidebar" class="col-md-4">
+		{% include 'partials/sidebar.html.twig' with {'blog':page.parent} %}
+	</div>
+</div>
+
 {% endblock %}

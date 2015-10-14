@@ -79,7 +79,7 @@ ul {
   ul li {
     list-style-type: none; }
 
-h1, h2, h4 {
+h1, h2 {
   width: 100%;
   margin: 0 auto;
   text-align: center; }
@@ -88,7 +88,9 @@ header#header {
   height: auto; }
 
 nav.navbar button.navbar-toggler {
-  color: #CBEFFF; }
+  background-color: rgba(36, 36, 36, 0.1);
+  color: #fff;
+  border-radius: 0; }
 
 nav.navbar ul.navbar-nav {
   width: 100%;
@@ -212,29 +214,10 @@ div#sidebar {
   div#sidebar div.sidebar-content {
     margin-bottom: 1.5rem; }
     div#sidebar div.sidebar-content h4 {
-      margin: 0.4rem 0; }
+      margin: 0.4rem 0;
+      text-align: center; }
     div#sidebar div.sidebar-content span.label {
       background-color: #69D0FD; }
-    div#sidebar div.sidebar-content ul.archives {
-      padding: 0; }
-      div#sidebar div.sidebar-content ul.archives span.archive_entry {
-        font-family: "azo-sans-web", Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
-        display: block;
-        border-radius: 0;
-        background-color: #69D0FD;
-        border: none;
-        color: #fff;
-        padding: 8px 12px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        text-align: center;
-        margin-bottom: 0.2rem;
-        letter-spacing: 1px; }
-        div#sidebar div.sidebar-content ul.archives span.archive_entry:hover {
-          background-color: #F59DA3;
-          color: #fff;
-          text-decoration: none; }
 
 span.tags a {
   text-transform: uppercase;
@@ -301,7 +284,9 @@ textarea {
     border-bottom: 2px solid #69D0FD; }
 
 ul.archive-plus {
-  text-align: left; }
+  text-align: left;
+  width: 70%;
+  margin: 0 auto; }
   ul.archive-plus .archive-label {
     color: #dedede; }
 
@@ -319,8 +304,8 @@ ul.archive-plus {
 
 .archive-plus li {
   border-bottom: 0;
-  line-height: 2em;
-  line-height: 2rem; }
+  line-height: 1rem;
+  margin: 1rem 0; }
 
 .archive-plus ul {
   margin-left: 1em;
@@ -329,6 +314,8 @@ ul.archive-plus {
 .archive-plus .archive-label ~ ul.last {
   margin-left: 2em;
   margin-left: 2rem; }
+  .archive-plus .archive-label ~ ul.last li {
+    font-size: 0.9rem; }
 
 .archive-plus ul label.arrows ~ ul {
   margin-left: 1.25em;

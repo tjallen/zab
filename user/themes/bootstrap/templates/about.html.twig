@@ -5,11 +5,11 @@
 	<div class="row">
 		<div class="col-md-8 responsive">
 		<h1>About me</h1>
+		{{ page.content }}
 		<figure style="text-align:center">
 			<a target="_blank" href="http://www.andsmilestudio.com/"><img src="user/pages/images/portrait-full.jpg" alt="Zabby portrait by AndSmile studio" style="max-width: 75%;margin:0 auto;">
 			<figcaption>Portrait by AndSmile Studio</a></figcaption>
 		</figure>
-		{{ page.content }}
 		</div>
 		<div id="sidebar" class="col-md-4">
 			{% include 'partials/sidebar.html.twig' %}
