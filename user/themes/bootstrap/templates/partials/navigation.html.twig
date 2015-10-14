@@ -1,49 +1,47 @@
 {% macro loop(page) %}
-		{% for p in page.children.visible %}
-				{% set current_page = (p.active or p.activeChild) ? 'active' : '' %}
-				<li class="hehe {{ current_page }}">
-						<a href="{{ p.url }}">
-								{% if p.header.icon %}<i class="fa fa-{{ p.header.icon }}"></i>{% endif %}
-								{{ p.menu }}
-						</a>
-						{% if p.children.visible.count > 0 %}
-								<ul>
-										{{ _self.loop(p) }}
-								</ul>
-						{% endif %}
-				</li>
-		{% endfor %}
+	{% for p in page.children.visible %}
+		{% set current_page = (p.active or p.activeChild) ? 'active' : '' %}
+		<li class="hehe {{ current_page }}">
+			<a href="{{ p.url }}">
+			{% if p.header.icon %}<i class="fa fa-{{ p.header.icon }}"></i>{% endif %}
+			{{ p.menu }}
+			</a>
+		{% if p.children.visible.count > 0 %}
+			<ul>
+				{{ _self.loop(p) }}
+			</ul>
+		{% endif %}
+		</li>
+	{% endfor %}
 {% endmacro %}
 
 <nav class="navbar">
-	<button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-		&#9776;
-	</button>
+	<button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapsingNavbar">&#9776;</button>
 	<div class="collapse navbar-toggleable-xs" id="collapsingNavbar">
 		<ul class="nav navbar-nav">
-		{% if theme_config.dropdown.enabled %}
-				{{ _self.loop(pages) }}
-		{% else %}
+			{% if theme_config.dropdown.enabled %}
+					{{ _self.loop(pages) }}
+			{% else %}
 				{% for page in pages.children.visible %}
-						{% set current_page = (page.active or page.activeChild) ? 'active' : '' %}
-						<li class="nav-item {{ current_page }}">
-								<a class="nav-link" href="{{ page.url }}">
-										{% if page.header.icon %}<i class="fa fa-{{ page.header.icon }}"></i>{% endif %}
-										{{ page.menu }}
-								</a>
-						</li>
-				{% endfor %}
-		{% endif %}
-		{% for mitem in site.menu %}
-				<li>
-						<a href="{{ mitem.url }}">
-								{% if mitem.icon %}<i class="fa fa-{{ mitem.icon }}"></i>{% endif %}
-								{{ mitem.text }}
+					{% set current_page = (page.active or page.activeChild) ? 'active' : '' %}
+					<li class="nav-item {{ current_page }}">
+						<a class="nav-link" href="{{ page.url }}">
+							{% if page.header.icon %}<i class="fa fa-{{ page.header.icon }}"></i>{% endif %}
+							{{ page.menu }}
 						</a>
+					</li>
+				{% endfor %}
+			{% endif %}
+			{% for mitem in site.menu %}
+				<li>
+					<a href="{{ mitem.url }}">
+						{% if mitem.icon %}<i class="fa fa-{{ mitem.icon }}"></i>{% endif %}
+						{{ mitem.text }}
+					</a>
 				</li>
-		{% endfor %}
-			<li class="nav-item"><a class="nav-link" href="https://www.etsy.com/uk/shop/ZabbyAllen">Etsy Shop</a></li>
-				</ul>
-		</div>
+			{% endfor %}
+				<li class="nav-item"><a class="nav-link" href="https://www.etsy.com/uk/shop/ZabbyAllen">Etsy Shop</a></li>
+			</ul>
+	</div>
 </nav>
 
