@@ -140,6 +140,8 @@ p {
 }
 
 ul {
+	-moz-padding-start: 0;
+	-moz-margin-start: 0;
 	-webkit-margin-before: 0;
 	-webkit-padding-before: 0;
 	-webkit-padding-start: 0;
@@ -250,14 +252,12 @@ div.hero {
 			letter-spacing: 1px;
 		}
 	}
-
 }
 
 .header-image #body .flush-top {
 	padding: 0;
 	margin: 0;
 }
-
 
 // page content
 // blog entries
@@ -304,7 +304,6 @@ div#listing {
 			}
 			li {
 				padding: 0.4rem 0.8rem;
-
 			}
 		}
 	}
@@ -350,7 +349,6 @@ div#sidebar {
 			margin: 0.4rem 0;
 			text-align: center;
 		}
-		
 		span.label {
 			background-color: $col-blu;
 		}
@@ -522,12 +520,11 @@ ul.archive-plus {
   margin-right: .35rem;
 }
 
-
+// footer
 footer#footer {
 	div.col-md-8 {
 		padding-top: 2rem;
 	}
-	
 	position: relative;
 	margin-top: 3rem;
 	padding: 1.5rem;
@@ -539,7 +536,6 @@ footer#footer {
 // queries
 // tablet ++
 @media (min-width: 34em) {
-
 	nav.navbar {
 		ul.navbar-nav {
 			li.nav-item {
