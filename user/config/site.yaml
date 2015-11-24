@@ -9,8 +9,8 @@ metadata:
   description: 'Zabby Allen - The girl with all the craft supplies'
 summary:
   enabled: false
-  format: short
-  size: 300
+  format: long
+  size: 0
   delimiter: '==='
 redirects:
   /redirect-test: /
