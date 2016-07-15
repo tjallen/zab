@@ -5,35 +5,37 @@
 {#
 <div class="hero" style="background-image: url({{ blog_image.url }});">
 #}
-<div class="hero" style="background-image: url('/user/pages/images/paperlayers.jpg')">
+<div class="hero" style="background-image: url('/user/pages/images/paperlayers-logo-60.jpg')">
 {% else %}
-<div class="hero" style="background-image: url('/user/pages/images/paperlayers.jpg')">
+<div class="hero" style="background-image: url('/user/pages/images/paperlayers-logo-60.jpg')">
 {% endif %}
 
 {% block header %}
 <header id="header">
-		<div id="navbar">
-				{% block header_extra %}{% endblock %}
-				{% if config.plugins.langswitcher.enabled %}
-				{% include 'partials/langswitcher.html.twig' %}
-				{% endif %}
-				{% block header_navigation %}
-				{% include 'partials/navigation.html.twig' %}
-				{% endblock %}
-		</div>
+    <div id="navbar">
+        {% block header_extra %}{% endblock %}
+        {% if config.plugins.langswitcher.enabled %}
+        {% include 'partials/langswitcher.html.twig' %}
+        {% endif %}
+        {% block header_navigation %}
+        {% include 'partials/navigation.html.twig' %}
+        {% endblock %}
+    </div>
 
 </header>
 {% endblock %}
 
 <div class="flush-top blog-header blog-header-image"> 
 
-	<div class="blog-header-image-inner">
+  <div class="blog-header-image-inner">
 
-		<h1>Zabby Allen</h1>
+    <!-- <h1>Zabby Allen</h1> -->
 
-		<h2 class="slogan">The girl with all the craft supplies</h2>
+    <!-- <h2 class="slogan">Creativity to make you happy</h2> -->
 
-	</div>
+  </div>
 </div> <!-- /header-image -->
 
 </div><!-- /hero (base)-->
+
+<!-- <h2 class="slogan-subhero" style="text-transform:uppercase; margin: 15px; font-size: 18px;font-weight:bold;">Creativity to make you happy</h2> -->

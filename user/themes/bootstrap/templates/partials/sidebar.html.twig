@@ -4,23 +4,19 @@
 
 <div class="sidebar-header">
 
-	{% if page.name == 'about.md' %}
-		<img src="/user/pages/images/zabby-circle-yellow.png" alt="" class="smile">
-		<p>Hi I’m Zabby, a colour loving creative from London. This blog is a place to share my inspirations, fun DIY projects and the odd freebie too. </p>
-	{% else %}
-		<a href="about">
-			<img src="/user/pages/images/zabby-circle-yellow.png" alt="" class="smile">
-		</a>
-		<p>Hi I’m Zabby, a colour loving creative from London. This blog is a place to share my inspirations, fun DIY projects and the odd freebie too.</p>
-		<p><a href="about">Find out more about me here</a>.</p></p>
-	{% endif %}
+  
+    <img src="/user/pages/images/zabby-circle-yellow.png" alt="" class="smile">
+    <p>Hi I’m Zabby, a colour loving creative from London. This blog is a place to share my inspirations, fun DIY projects and the odd freebie too. </p>
+  {% if page.name != 'about.md' %}
+    <p><a href="about">Find out more about me here</a>.</p></p>
+  {% endif %}
 
-	<ul class="list-social list-inline">
-		<a href="http://www.instagram.com/zabbyallen"><li><i class="icon-zab fa fa-instagram"></i></li></a>
-		<a href="http://www.pinterest.com/zallen"><li><i class="icon-zab fa fa-pinterest-p"></i></i></li></a>
-		<a href="http://www.twitter.com/zabbyallen"><li><i class="icon-zab fa fa-twitter"></i></li></a>
-		<a href="http://www.bloglovin.com/zabbyallen"><li><i class="icon-zab fa fa-plus"></i></li></a>
-	</ul>
+  <ul class="list-social list-inline">
+    <a href="http://www.instagram.com/zabbyallen"><li><i class="icon-zab fa fa-instagram"></i></li></a>
+    <a href="http://www.pinterest.com/zallen"><li><i class="icon-zab fa fa-pinterest-p"></i></i></li></a>
+    <a href="http://www.twitter.com/zabbyallen"><li><i class="icon-zab fa fa-twitter"></i></li></a>
+    <a href="http://www.bloglovin.com/zabbyallen"><li><i class="icon-zab fa fa-plus"></i></li></a>
+  </ul>
 </div>
 
 {% if page.title == 'Blog' or page.name == 'item.md' %}
@@ -28,9 +24,9 @@
 {% endif %}
 
 <div class="sidebar-content">
-	<h4>Instagram</h4>
-	<script src="//instansive.com/widget/js/instansive.js"></script>
-	<iframe src="//instansive.com/widgets/c8260fb9300162f8b693275610a5e4c747e373c4.html" id="instansive_c8260fb930" name="instansive_c8260fb930"  scrolling="no" allowtransparency="true" class="instansive-widget" style="width: 100%; border: 0; overflow: hidden;"></iframe>
+  <h4>Instagram</h4>
+  <script src="//instansive.com/widget/js/instansive.js"></script>
+  <iframe src="//instansive.com/widgets/c8260fb9300162f8b693275610a5e4c747e373c4.html" id="instansive_c8260fb930" name="instansive_c8260fb930"  scrolling="no" allowtransparency="true" class="instansive-widget" style="width: 100%; border: 0; overflow: hidden;"></iframe>
 </div>
 
 
