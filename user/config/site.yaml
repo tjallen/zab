@@ -8,9 +8,9 @@ taxonomies:
 metadata:
   description: 'Zabby Allen - The girl with all the craft supplies'
 summary:
-  enabled: false
-  format: long
-  size: 0
+  enabled: true
+  format: short
+  size: 300
   delimiter: '==='
 redirects:
   /redirect-test: /
