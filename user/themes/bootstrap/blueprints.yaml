@@ -1,15 +1,15 @@
 name: Bootstrap
-version: 1.4.1
-description: "Bootstrap is built using the popular **Bootstrap** Framework"
+version: 1.5.0
+description: "Bootstrap theme - adapted for Zabbyallen.com"
 icon: bold
 author:
-  name: Team Grav
-  email: devs@getgrav.org
-  url: http://getgrav.org
-homepage: https://github.com/getgrav/grav-theme-bootstrap
-demo: http://demo.getgrav.org/bootstrap-skeleton/
+  name: thom allen
+  email: thomwork@gmail.com
+  url: http://thomjamesallen.com
+homepage: https://github.com/tjallen/zab/
+demo: https://github.com/tjallen/zab/
 keywords: bootstrap, theme, framework
-bugs: https://github.com/getgrav/grav-theme-bootstrap/issues
+bugs: https://github.com/tjallen/zab/issues
 license: MIT
 
 dependencies:
