@@ -1,3 +1,522 @@
+# v1.1.1
+## 07/16/2016
+
+1. [](#improved)
+    * Made `paramsRegex()` static to allow it to be called statically
+1. [](#bugfix)
+    * Fixed backup when using very long site titles with invalid characters [grav-plugin-admin#701](https://github.com/getgrav/grav-plugin-admin/issues/701)
+    * Fixed a typo in the `webserver-configs/nginx.conf` example
+
+# v1.1.0
+## 07/14/2016
+
+1. [](#improved)
+    * Added support for validation of multiple email in the `type: email` field [grav-plugin-email#31](https://github.com/getgrav/grav-plugin-email/issues/31)
+    * Unified PHP code header styling
+    * Added 6 more languages and updated language codes
+    * set default "releases" option to `stable`
+1. [](#bugfix)
+    * Fix backend validation for file fields marked as required [grav-plugin-form#78](https://github.com/getgrav/grav-plugin-form/issues/78)
+
+# v1.1.0-rc.3
+## 06/21/2016
+
+1. [](#new)
+    * Add a onPageFallBackUrl event when starting the fallbackUrl() method to allow the Login plugin to protect the page media
+    * Conveniently allow ability to retrieve user information via config object [#913](https://github.com/getgrav/grav/pull/913) - @Vivalldi
+    * Grav served images can now use header caching [#905](https://github.com/getgrav/grav/pull/905)
+1. [](#improved)
+    * Take asset modification timestamp into consideration in pipelining [#917](https://github.com/getgrav/grav/pull/917) - @Sommerregen
+1. [](#bugfix)
+    * Respect `enable_asset_timestamp` settings for pipelined Assets [#906](https://github.com/getgrav/grav/issues/906)
+    * Fixed collections end dates for 32-bit systems [#902](https://github.com/getgrav/grav/issues/902)
+    * Fixed a recent regression (1.1.0-rc1) with parameter separator different than `:`
+
+# v1.1.0-rc.2
+## 06/14/2016
+
+1. [](#new)
+    * Added getters and setters for Assets to allow manipulation of CSS/JS/Collection based assets via plugins [#876](https://github.com/getgrav/grav/issues/876)
+1. [](#improved)
+    * Pass the exception to the `onFatalException()` event
+    * Updated to latest jQuery 2.2.4 release
+    * Moved list items in `system/config/media.yaml` config into a `types:` key which allows you delete default items.
+    * Updated `webserver-configs/nginx.conf` with `try_files` fix from @mrhein and @rondlite [#743](https://github.com/getgrav/grav/pull/743)
+    * Updated cache references to include `memecache` and `redis` [#887](https://github.com/getgrav/grav/issues/887)
+    * Updated composer libraries
+1. [](#bugfix)
+    * Fixed `Utils::normalizePath()` that was truncating 0's [#882](https://github.com/getgrav/grav/issues/882)
+
+# v1.1.0-rc.1
+## 06/01/2016
+
+1. [](#new)
+    * Added `Utils::getDotNotation()` and `Utils::setDotNotation()` methods + tests
+    * Added support for `xx-XX` locale language lookups in `LanguageCodes` class [#854](https://github.com/getgrav/grav/issues/854)
+    * New CSS/JS Minify library that does a more reliable job [#864](https://github.com/getgrav/grav/issues/864)
+1. [](#improved)
+    * GPM installation of plugins and themes into correct multisite folders [#841](https://github.com/getgrav/grav/issues/841)
+    * Use `Page::rawRoute()` in blueprints for more reliable mulit-language support
+1. [](#bugfix)
+    * Fixes for `zlib.output_compression` as well as `mod_deflate` GZIP compression
+    * Fix for corner-case redirect logic causing infinite loops and out-of-memory errors
+    * Fix for saving fields in expert mode that have no `Validation::typeX()` methods [#626](https://github.com/getgrav/grav-plugin-admin/issues/626)
+    * Detect if user really meant to extend parent blueprint, not another one (fixes old page type blueprints)
+    * Fixed a bug in `Page::relativePagePath()` when `Page::$name` is not defined
+    * Fix for poor handling of params + query element in `Uri::processParams()` [#859](https://github.com/getgrav/grav/issues/859)
+    * Fix for double encoding in markdown links [#860](https://github.com/getgrav/grav/issues/860)
+    * Correctly handle language strings to determine if it's in admin or not [#627](https://github.com/getgrav/grav-plugin-admin/issues/627)
+
+# v1.1.0-beta.5
+## 05/23/2016
+
+1. [](#improved)
+    * Updated jQuery from 2.2.0 to 2.2.3
+    * Set `Uri::ip()` to static by default so it can be used in form fields
+    * Improved `Session` class with flash storage
+    * `Page::getContentMeta()` now supports an optional key.
+1. [](#bugfix)
+    * Fixed "Invalid slug set in YAML frontmatter" when setting `Page::slug()` with empty string [#580](https://github.com/getgrav/grav-plugin-admin/issues/580)
+    * Only `.gitignore` Grav's vendor folder
+    * Fix trying to remove Grav with `GPM uninstall` of a plugin with Grav dependency
+    * Fix Page Type blueprints not being able to extend their parents
+    * `filterFile` validation method always returns an array of files, behaving like `multiple="multiple"`
+    * Fixed [#835](https://github.com/getgrav/grav-plugin-admin/issues/835) check for empty image file first to prevent getimagesize() fatal error
+    * Avoid throwing an error when Grav's Gzip and mod_deflate are enabled at the same time on a non php-fpm setup
+
+# v1.1.0-beta.4
+## 05/09/2016
+
+1. [](#bugfix)
+    * Drop dependencies calculations if plugin is installed via symlink
+    * Drop Grav from dependencies calculations
+    * Send slug name as part of installed packages
+    * Fix for summary entities not being properly decoded [#825](https://github.com/getgrav/grav/issues/825)
+
+
+# v1.1.0-beta.3
+## 05/04/2016
+
+1. [](#improved)
+    * Pass the Page type when calling `onBlueprintCreated`
+    * Changed `Page::cachePageContent()` form **private** to **public** so a page can be recached via plugin
+1. [](#bugfix)
+    * Fixed handling of `{'loading':'async'}` with Assets Pipeline
+    * Fix for new modular page modal `Page` field requiring a value [#529](https://github.com/getgrav/grav-plugin-admin/issues/529)
+    * Fix for broken `bin/gpm version` command
+    * Fix handling "grav" as a dependency
+    * Fix when installing multiple packages and one is the dependency of another, don't try to install it twice
+    * Fix using name instead of the slug to determine a package folder. Broke for packages whose name was 2+ words
+
+# v1.1.0-beta.2
+## 04/27/2016
+
+1. [](#new)
+    * Added new `Plugin::getBlueprint()` and `Theme::getBlueprint()` method
+    * Allow **page blueprints** to be added via Plugins.
+1. [](#improved)
+    * Moved to new `data-*@` format in blueprints
+    * Updated composer-based libraries
+    * Moved some hard-coded `CACHE_DIR` references to use locator
+    * Set `twig.debug: true` by default
+1. [](#bugfix)
+    * Fixed issue with link rewrites and local assets pipeline with `absolute_urls: true`
+    * Allow Cyrillic slugs [#520](https://github.com/getgrav/grav-plugin-admin/issues/520)
+    * Fix ordering issue with accented letters [#784](https://github.com/getgrav/grav/issues/784)
+    * Fix issue with Assets pipeline and missing newlines causing invalid JavaScript
+
+# v1.1.0-beta.1
+## 04/20/2016
+
+1. [](#new)
+    * **Blueprint Improvements**: The main improvements to Grav take the form of a major rewrite of our blueprint functionality. Blueprints are an essential piece of functionality within Grav that helps define configuration fields. These allow us to create a definition of a form field that can be rendered in the administrator plugin and allow the input, validation, and storage of values into the various configuration and page files that power Grav. Grav 1.0 had extensive support for building and extending blueprints, but Grav 1.1 takes this even further and adds improvements to our existing system.
+    * **Extending Blueprints**: You could extend forms in Grav 1.0, but now you can use a newer `extends@:` default syntax rather than the previous `'@extends'` string that needed to be quoted in YAML. Also this new format allows for the defining of a `context` which lets you define where to look for the base blueprint. Another new feature is the ability to extend from multiple blueprints.
+    * **Embedding/Importing Blueprints**: One feature that has been requested is the ability to embed or import one blueprint into another blueprint. This allows you to share fields or sub-form between multiple forms. This is accomplished via the `import@` syntax.
+    * **Removing Existing Fields and Properties**: Another new feature is the ability to remove completely existing fields or properties from an extended blueprint. This allows the user a lot more flexibility when creating custom forms by simply using the new `unset@: true` syntax. To remove a field property you would use `unset-<property>@: true` in your extended field definition, for example: `unset-options@: true`.
+    * **Replacing Existing Fields and Properties**: Similar to removing, you can now replace an existing field or property with the `replace@: true` syntax for the whole field, and `replace-<property>@: true` for a specific property.
+    * **Field Ordering**: Probably the most frequently requested blueprint functionality that we have added is the ability to change field ordering. Imagine that you want to extend the default page blueprint but add a new tab. Previously, this meant your tab would be added at the end of the form, but now you can define that you wish the new tab to be added right after the `content` tab. This works for any field too, so you can extend a blueprint and add your own custom fields anywhere you wish! This is accomplished by using the new `ordering@:` syntax with either an existing property name or an integer.
+    * **Configuration Properties**: Another useful new feature is the ability to directly access Grav configuration in blueprints with `config-<property>@` syntax. For example you can set a default for a field via `config-default@: site.author.name` which will use the author.name value from the `site.yaml` file as the `default` value for this field.
+    * **Function Calls**: The ability to call PHP functions for values has been improved in Grav 1.1 to be more powerful. You can use the `data-<property>@` syntax to call static methods to obtain values. For example: `data-default@: '\Grav\Plugin\Admin::route'`. You can now even pass parameters to these methods.
+    * **Validation Rules**: You can now define a custom blueprint-level validation rule and assign this rule to a form field.
+    * **Custom Form Field Types**: This advanced new functionality allows you to create a custom field type via a new plugin event called getFormFieldTypes(). This allows you to provide extra functionality or instructions on how to handle the form form field.
+    * **GPM Versioning**: A new feature that we have wanted to add to our GPM package management system is the ability to control dependencies by version. We have opted to use a syntax very similar to the Composer Package Manager that is already familiar to most PHP developers. This new versioning system allows you to define specific minimum version requirements of dependent packages within Grav. This should ensure that we have less (hopefully none!) issues when you update one package that also requires a specific minimum version of another package. The admin plugin for example may have an update that requires a specific version of Grav itself.
+    * **GPM Testing Channel**: GPM repository now comes with both a `stable` and `testing` channel. A new setting in `system.gpm.releases` allow to switch between the two channels. Developers will be able to decide whether their resource is going to be in a pre-release state or stable. Only users who switch to the **testing** channel will be able to install a pre-release version.
+    * **GPM Events**: Packages (plugins and themes) can now add event handlers to hook in the package GPM events: install, update, uninstall. A package can listen for events before and after each of these events, and can execute any PHP code, and optionally halt the procedure or return a message.
+    * Refactor of the process chain breaking out `Processors` into individual classes to allow for easier modification and addition. Thanks to toovy for this work. - [#745](https://github.com/getgrav/grav/pull/745)
+    * Added multipart downloads, resumable downloads, download throttling, and video streaming in the `Utils::download()` method.
+    * Added optional config to allow Twig processing in page frontmatter - [#788](https://github.com/getgrav/grav/pull/788)
+    * Added the ability to provide blueprints via a plugin (previously limited to Themes only).
+    * Added Developer CLI Tools to easily create a new theme or plugin
+    * Allow authentication for proxies - [#698](https://github.com/getgrav/grav/pull/698)
+    * Allow to override the default Parsedown behavior - [#747](https://github.com/getgrav/grav/pull/747)
+    * Added an option to allow to exclude external files from the pipeline, and to render the pipeline before/after excluded files
+    * Added the possibility to store translations of themes in separate files inside the `languages` folder
+    * Added a method to the Uri class to return the base relative URL including the language prefix, or the base relative url if multilanguage is not enabled
+    * Added a shortcut for pages.find() alias
+1. [](#improved)
+    * Now supporting hostnames with localhost environments for better vhost support/development
+    * Refactor hard-coded paths to use PHP Streams that allow a setup file to configure where certain parts of Grav are stored in the physical filesystem.
+    * If multilanguage is active, include the Intl Twig Extension to allow translating dates automatically (http://twig.sensiolabs.org/doc/extensions/intl.html)
+    * Allow having local themes with the same name as GPM themes, by adding `gpm: false` to the theme blueprint - [#767](https://github.com/getgrav/grav/pull/767)
+    * Caddyfile and Lighttpd config files updated
+    * Removed `node_modules` folder from backups to make them faster
+    * Display error when `bin/grav install` hasn't been run instead of throwing exception. Prevents "white page" errors if error display is off
+    * Improved command line flow when installing multiple packages: don't reinstall packages if already installed, ask once if should use symlinks if symlinks are found
+    * Added more tests to our testing suite
+    * Added x-ua-compatible to http_equiv metadata processing
+    * Added ability to have a per-page `frontmatter.yaml` file to set header frontmatter defaults. Especially useful for multilang scenarios - [#775](https://github.com/getgrav/grav/pull/775)
+    * Removed deprecated `bin/grav newuser` CLI command.  use `bin/plugin login newuser` instead.
+    * Added `webm` and `ogv` video types to the default media types list.
+1. [](#bugfix)
+    * Fix Zend Opcache `opcache.validate_timestamps=0` not detecting changes in compiled yaml and twig files
+    * Avoid losing params, query and fragment from the URL when auto-redirecting to a language-specific route - [#759](https://github.com/getgrav/grav/pull/759)
+    * Fix for non-pipeline assets getting lost when pipeline is cached to filesystem
+    * Fix for double encoding resulting from Markdown Extra
+    * Fix for a remote link breaking all CSS rewrites for pipeline
+    * Fix an issue with Retina alternatives not clearing properly between repeat uses
+    * Fix for non standard http/s external markdown links - [#738](https://github.com/getgrav/grav/issues/738)
+    * Fix for `find()` calling redirects via `dispatch()` causing infinite loops - [#781](https://github.com/getgrav/grav/issues/781)
+
+# v1.0.10
+## 02/11/2016
+
+1. [](#new)
+    * Added new `Page::contentMeta()` mechanism to store content-level meta data alongside content
+    * Added Japanese language translation
+1. [](#improved)
+    * Updated some vendor libraries
+1. [](#bugfix)
+    * Hide `streams` blueprint from Admin plugin
+    * Fix translations of languages with `---` in YAML files
+
+# v1.0.9
+## 02/05/2016
+
+1. [](#new)
+    * New **Unit Testing** via Codeception http://codeception.com/
+    * New **page-level SSL** functionality when using `absolute_urls`
+    * Added `reverse_proxy` config option for issues with non-standard ports
+    * Added `proxy_url` config option to support GPM behind proxy servers #639
+    * New `Pages::parentsRawRoutes()` method
+    * Enhanced `bin/gpm info` CLI command with Changelog support #559
+    * Ability to add empty *Folder* via admin plugin
+    * Added latest `jQuery 2.2.0` library to core
+    * Added translations from Crowdin
+1. [](#improved)
+    * [BC] Metadata now supports only flat arrays. To use open graph metas and the likes (ie, 'og:title'), simply specify it in the key.
+    * Refactored `Uri::convertUrl()` method to be more reliable + tests created
+    * Date for last update of a modular sub-page sets modified date of modular page itself
+    * Split configuration up into two steps
+    * Moved Grav-based `base_uri` variables into `Uri::init()`
+    * Refactored init in `URI` to better support testing
+    * Allow `twig_vars` to be exposed earlier and merged later
+    * Avoid setting empty metadata
+    * Accept single group access as a string rather than requiring an array
+    * Return `$this` in Page constructor and init to allow chaining
+    * Added `ext-*` PHP requirements to `composer.json`
+    * Use Whoops 2.0 library while supporting old style
+    * Removed redundant old default-hash fallback mechanisms
+    * Commented out default redirects and routes in `site.yaml`
+    * Added `/tests` folder to deny's of all `webserver-configs/*` files
+    * Various PS and code style fixes
+1. [](#bugfix)
+    * Fix default generator metadata
+    * Fix for broken image processing caused by `Uri::convertUrl()` bugs
+    * Fix loading JS and CSS from collections #623
+    * Fix stream overriding
+    * Remove the URL extension for home link
+    * Fix permissions when the user has no access level set at all
+    * Fix issue with user with multiple groups getting denied on first group
+    * Fixed an issue with `Pages()` internal cache lookup not being unique enough
+    * Fix for bug with `site.redirects` and `site.routes` being an empty list
+    * [Markdown] Don't process links for **special protocols**
+    * [Whoops] serve JSON errors when request is JSON
+
+
+# v1.0.8
+## 01/08/2016
+
+1. [](#new)
+    * Added `rotate`, `flip` and `fixOrientation` image medium methods
+1. [](#bugfix)
+    * Removed IP from Nonce generation. Should be more reliable in a variety of scenarios
+
+# v1.0.7
+## 01/07/2016
+
+1. [](#new)
+    * Added `composer create-project` as an additional installation method #585
+    * New optional system config setting to strip home from page routs and urls #561
+    * Added Greek, Finnish, Norwegian, Polish, Portuguese, and Romanian languages
+    * Added new `Page->topParent()` method to return top most parent of a page
+    * Added plugins configuration tab to debugger
+    * Added support for APCu and PHP7.0 via new Doctrine Cache release
+    * Added global setting for `twig_first` processing (false by default)
+    * New configuration options for Session settings #553
+1. [](#improved)
+    * Switched to SSL for GPM calls
+    * Use `URI->host()` for session domain
+    * Add support for `open_basedir` when installing packages via GPM
+    * Improved `Utils::generateNonceString()` method to handle reverse proxies
+    * Optimized core thumbnails saving 38% in file size
+    * Added new `bin/gpm index --installed-only` option
+    * Improved GPM errors to provider more helpful diagnostic of issues
+    * Removed old hardcoded PHP version references
+    * Moved `onPageContentProcessed()` event so it's fired more reliably
+    * Maintain md5 keys during sorting of Assets #566
+    * Update to Caddyfile for Caddy web server
+1. [](#bugfix)
+    * Fixed an issue with cache/config checksum not being set on cache load
+    * Fix for page blueprint and theme inheritance issue #534
+    * Set `ZipBackup` timeout to 10 minutes if possible
+    * Fix case where we only have inline data for CSS or JS  #565
+    * Fix `bin/grav sandbox` command to work with new `webserver-config` folder
+    * Fix for markdown attributes on external URLs
+    * Fixed issue where `data:` page header was acting as `publish_date:`
+    * Fix for special characters in URL parameters (e.g. /tag:c++) #541
+    * Safety check for an array of nonces to only use the first one
+
+# v1.0.6
+## 12/22/2015
+
+1. [](#new)
+    * Set minimum requirements to [PHP 5.5.9](http://bit.ly/1Jt9OXO)
+    * Added `saveConfig` to Themes
+1. [](#improved)
+    * Updated Whoops to new 2.0 version (PHP 7.0 compatible)
+    * Moved sample web server configs into dedicated directory
+    * FastCGI will use Apache's `mod_deflate` if gzip turned off
+1. [](#bugfix)
+    * Fix broken media image operators
+    * Only call extra method of blueprints if blueprints exist
+    * Fix lang prefix in url twig variables #523
+    * Fix case insensitive HTTPS check #535
+    * Field field validation handles case `multiple` missing
+
+# v1.0.5
+## 12/18/2015
+
+1. [](#new)
+    * Add ability to extend markdown with plugins
+    * Added support for plugins to have individual language files
+    * Added `7z` to media formats
+    * Use Grav's fork of Parsedown until PR is merged
+    * New function to persist plugin configuration to disk
+    * GPM `selfupgrade` will now check PHP version requirements
+1. [](#improved)
+    * If the field allows multiple files, return array
+    * Handle non-array values in file validation
+1. [](#bugfix)
+    * Fix when looping `fields` param in a `list` field
+    * Properly convert commas to spaces for media attributes
+    * Forcing Travis VM to HI timezone to address future files in zip file
+
+# v1.0.4
+## 12/12/2015
+
+1. [](#bugfix)
+    * Needed to put default image folder permissions for YAML compatibility
+
+# v1.0.3
+## 12/11/2015
+
+1. [](#bugfix)
+    * Fixed issue when saving config causing incorrect image cache folder perms
+
+# v1.0.2
+## 12/11/2015
+
+1. [](#bugfix)
+    * Fix for timing display in debugbar
+
+# v1.0.1
+## 12/11/2015
+
+1. [](#improved)
+    * Reduced package sizes by removing extra vendor dev bits
+1. [](#bugfix)
+    * Fix issue when you enable debugger from admin plugin
+
+# v1.0.0
+## 12/11/2015
+
+1. [](#new)
+    * Add new link attributes via markdown media
+    * Added setters to set state of CSS/JS pipelining
+    * Added `user/accounts` to `.gitignore`
+    * Added configurable permissions option for Image cache
+1. [](#improved)
+    * Hungarian translation updated
+    * Refactored Theme initialization for improved flexibility
+    * Wrapped security section of account blueprints in an 'super user' authorize check
+    * Minor performance optimizations
+    * Updated core page blueprints with markdown preview option
+    * Added useful cache info output to Debugbar
+    * Added `iconv` polyfill library used by Symfony 2.8
+    * Force lowercase of username in a few places for case sensitive filesystems
+1. [](#bugfix)
+    * Fix for GPM problems "Call to a member function set() on null"
+    * Fix for individual asset pipeline values not functioning
+    * Fix `Page::copy()` and `Page::move()` to support multiple moves at once
+    * Fixed page moving of a page with no content
+    * Fix for wrong ordering when moving many pages
+    * Escape root path in page medium files to work with special characters
+    * Add missing parent constructor to Themes class
+    * Fix missing file error in `bin/grav sandbox` command
+    * Fixed changelog differ when upgrading Grav
+    * Fixed a logic error in `Validation->validate()`
+    * Make `$container` available in `setup.php` to fix multi-site
+
+# v1.0.0-rc.6
+## 12/01/2015
+
+1. [](#new)
+    * Refactor Config classes for improved performance!
+    * Refactor Data classes to use `NestedArrayAccess` instead of `DataMutatorTrait`
+    * Added support for `classes` and `id` on medium objects to set CSS values
+    * Data objects: Allow function call chaining
+    * Data objects: Lazy load blueprints only if needed
+    * Automatically create unique security salt for each configuration
+    * Added Hungarian translation
+    * Added support for User groups
+1. [](#improved)
+    * Improved robots.txt to disallow crawling of non-user folders
+    * Nonces only generated once per action and process
+    * Added IP into Nonce string calculation
+    * Nonces now use random string with random salt to improve performance
+    * Improved list form handling #475
+    * Vendor library updates
+1. [](#bugfix)
+    * Fixed help output for `bin/plugin`
+    * Fix for nested logic for lists and form parsing #273
+    * Fix for array form fields and last entry not getting deleted
+    * Should not be able to set parent to self #308
+
+# v1.0.0-rc.5
+## 11/20/2015
+
+1. [](#new)
+    * Added **nonce** functionality for all admin forms for improved security
+    * Implemented the ability for Plugins to provide their own CLI commands through `bin/plugin`
+    * Added Croatian translation
+    * Added missing `umask_fix` property to `system.yaml`
+    * Added current theme's config to global config. E.g. `config.theme.dropdown_enabled`
+    * Added `append_url_extension` option to system config & page headers
+    * Users have a new `state` property to allow disabling/banning
+    * Added new `Page.relativePagePath()` helper method
+    * Added new `|pad` Twig filter for strings (uses `str_pad()`)
+    * Added `lighttpd.conf` for Lightly web server
+1. [](#improved)
+    * Clear previously applied operations when doing a reset on image media
+    * Password no longer required when editing user
+    * Improved support for trailing `/` URLs
+    * Improved `.nginx.conf` configuration file
+    * Improved `.htaccess` security
+    * Updated vendor libs
+    * Updated `composer.phar`
+    * Use streams instead of paths for `clearCache()`
+    * Use PCRE_UTF8 so unicode strings can be regexed in Truncator
+    * Handle case when login plugin is disabled
+    * Improved `quality` functionality in media handling
+    * Added some missing translation strings
+    * Deprecated `bin/grav newuser` in favor of `bin/plugin login new-user`
+    * Moved fallback types to use any valid media type
+    * Renamed `system.pages.fallback_types` to `system.media.allowed_fallback_types`
+    * Removed version number in default `generator` meta tag
+    * Disable time limit in case of slow downloads
+    * Removed default hash in `system.yaml`
+1. [](#bugfix)
+    * Fix for media using absolute URLs causing broken links
+    * Fix theme auto-loading #432
+    * Don't create empty `<style>` or `<script>` scripts if no data
+    * Code cleanups
+    * Fix undefined variable in Config class
+    * Fix exception message when label is not set
+    * Check in `Plugins::get()` to ensure plugins exists
+    * Fixed GZip compression making output buffering work correctly with all servers and browsers
+    * Fixed date representation in system config
+
+# v1.0.0-rc.4
+## 10/29/2015
+
+1. [](#bugfix)
+    * Fixed a fatal error if you have a collection with missing or invalid `@page: /route`
+
+# v1.0.0-rc.3
+## 10/29/2015
+
+1. [](#new)
+    * New Page collection options! `@self.parent, @self.siblings, @self.descendants` + more
+    * White list of file types for fallback route functionality (images by default)
+1. [](#improved)
+    * Assets switched from defines to streams
+1. [](#bugfix)
+    * README.md typos fixed
+    * Fixed issue with routes that have lang string in them (`/en/english`)
+    * Trim strings before validation so whitespace is not satisfy 'required'
+
+# v1.0.0-rc.2
+## 10/27/2015
+
+1. [](#new)
+    * Added support for CSS Asset groups
+    * Added a `wrapped_site` system option for themes/plugins to use
+    * Pass `Page` object as event to `onTwigPageVariables()` event hook
+    * New `Data.items()` method to get all items
+1. [](#improved)
+    * Missing pipelined remote asset will now fail quietly
+    * More reliably handle inline JS and CSS to remove only surrounding HTML tags
+    * `Medium.meta` returns new Data object so null checks are possible
+    * Improved Medium metadata merging to allow for automatic title/alt/class attributes
+    * Moved Grav object to global variable rather than template variable (useful for macros)
+    * German language improvements
+    * Updated bundled composer
+1. [](#bugfix)
+    * Accept variety of `true` values in `User.authorize()` method
+    * Fix for `Validation` throwing an error if no label set
+
+# v1.0.0-rc.1
+## 10/23/2015
+
+1. [](#new)
+    * Use native PECL YAML parser if installed for 4X speed boost in parsing YAML files
+    * Support for inherited theme class
+    * Added new default language prepend system configuration option
+    * New `|evaluate` Twig filter to evaluate a string as twig
+    * New system option to ignore all **hidden** files and folders
+    * New system option for default redirect code
+    * Added ability to append specific `[30x]` codes to redirect URLs
+    * Added `url_taxonomy_filters` for page collections
+    * Added `@root` page and `recurse` flag for page collections
+    * Support for **multiple** page collection types as an array
+    * Added Dutch language file
+    * Added Russian language file
+    * Added `remove` method to User object
+1. [](#improved)
+    * Moved hardcoded mimetypes to `media.yaml` to be treated as Page media files
+    * Set `errors: display: false` by default in `system.yaml`
+    * Strip out extra slashes in the URI
+    * Validate hostname to ensure it is valid
+    * Ignore more SCM folders in Backups
+    * Removed `home_redirect` settings from `system.yaml`
+    * Added Page `media` as root twig object for consistency
+    * Updated to latest vendor libraries
+    * Optimizations to Asset pipeline logic for minor speed increase
+    * Block direct access to a variety of files in `.htaccess` for increased security
+    * Debugbar vendor library update
+    * Always fallback to english if other translations are not available
+1. [](#bugfix)
+    * Fix for redirecting external URL with multi-language
+    * Fix for Asset pipeline not respecting asset groups
+    * Fix language files with child/parent theme relationships
+    * Fixed a regression issue resulting in incorrect default language
+    * Ensure error handler is initialized before URI is processed
+    * Use default language in Twig if active language is not set
+    * Fixed issue with `safeEmailFilter()` Twig filter not separating with `;` properly
+    * Fixed empty YAML file causing error with native PECL YAML parser
+    * Fixed `SVG` mimetype
+    * Fixed incorrect `Cache-control: max-age` value format
+
 # v0.9.45
 ## 10/08/2015
 
