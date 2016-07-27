@@ -1,6 +1,12 @@
 enabled: true
 route: '/admin'
 theme: grav
+logo_text: ''
+body_classes: ''
+sidebar:
+    activate: tab
+    hover_delay: 100
+    size: auto
 dashboard:
   days_of_stats: 7
 session:
@@ -8,7 +14,7 @@ session:
 warnings:
   delete_page: true
 edit_mode: normal
-show_beta_msg: true
+show_github_msg: true
 google_fonts: true
 enable_auto_updates_check: true
 popularity:

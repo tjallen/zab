@@ -1,21 +1,42 @@
 {% extends 'partials/base.html.twig' %}
 
-{% if admin.route %}
-    {% set installing = admin.route starts with 'install' %}
-    {% set installed = true %}
+{% set plugin_slug = admin.route %}
 
-    {# Try installed packages first, then remote #}
-    {% set package = admin.plugins(true)[admin.route] %}
-    {% if (not package) %}
-        {% set package = admin.plugins(false)[admin.route] %}
-        {% set installed = false %}
+{% if plugin_slug %}
+    {% set installing = plugin_slug starts with 'install' %}
+
+    {% if installing %}
+        {% set title = "PLUGIN_ADMIN.PLUGINS"|tu %}
+    {% else %}
+        {% set installed = true %}
+
+        {# Try installed packages first, then remote #}
+        {% set package = admin.plugins(true)[admin.route] %}
+        {% if (not package) %}
+            {% set package = admin.plugins(false)[admin.route] %}
+            {% set installed = false %}
+        {% endif %}
+
+        {% set plugin = package.toArray() %}
+        {% set title = "PLUGIN_ADMIN.PLUGIN"|tu ~ ": " ~ plugin.name|e %}
     {% endif %}
+{% else %}
+    {% set title = "PLUGIN_ADMIN.PLUGINS"|tu %}
+{% endif %}
 
-    {% set plugin = package.toArray() %}
-    {% set title = "PLUGIN_ADMIN.PLUGIN"|tu ~ ": " ~ plugin.name|e %}
+{% if admin.route or installing %}
+    {% block stylesheets %}
+        {% do assets.addCss(theme_url~'/css/codemirror/codemirror.css') %}
+        {{ parent() }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+    {% endblock %}
 {% endif %}
 
 {% block titlebar %}
+
     {% if not admin.route or installing %}
         <div class="button-bar">
         {% if (installing) %}
@@ -33,6 +54,7 @@
         {% if (installed) %}
         <div class="button-bar">
             <a class="button" href="{{ base_url_relative }}/plugins"><i class="fa fa-arrow-left"></i> {{ "PLUGIN_ADMIN.BACK_TO_PLUGINS"|tu }}</a>
+            {% include 'plugins/'~admin.route~'-buttons.html.twig' ignore missing %}
             <button class="button" type="submit" name="task" value="save" form="blueprints"><i class="fa fa-check"></i> {{ "PLUGIN_ADMIN.SAVE"|tu }}</button>
         </div>
         {% else %}
@@ -47,13 +69,11 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="gpm gpm-plugins">
-
         {% include 'partials/messages.html.twig' %}
 
         {% if not admin.route or installing %}
-            {%  include 'partials/plugins-list.html.twig' %}
+            {% include 'partials/plugins-list.html.twig' %}
         {% else %}
             {% include 'partials/plugins-details.html.twig' %}
         {% endif %}

@@ -1,7 +1,7 @@
 <?php
 namespace Grav\Plugin\Admin;
 
-use Grav\Common\GravTrait;
+use Grav\Common\Grav;
 use Grav\Common\GPM\GPM as GravGPM;
 use Grav\Common\GPM\Installer;
 use Grav\Common\GPM\Response;
@@ -9,17 +9,22 @@ use Grav\Common\GPM\Upgrader;
 use Grav\Common\Filesystem\Folder;
 use Grav\Common\GPM\Common\Package;
 
+/**
+ * Class Gpm
+ * @package Grav\Plugin\Admin
+ */
 class Gpm
 {
-    use GravTrait;
-
     // Probably should move this to Grav DI container?
+    /** @var GravGPM */
     protected static $GPM;
+
     public static function GPM()
     {
         if (!static::$GPM) {
             static::$GPM = new GravGPM();
         }
+
         return static::$GPM;
     }
 
@@ -36,7 +41,13 @@ class Gpm
         'theme'           => false
     ];
 
-    public static function install($packages, $options)
+    /**
+     * @param Package[]|string[]|string $packages
+     * @param array                     $options
+     *
+     * @return bool
+     */
+    public static function install($packages, array $options)
     {
         $options = array_merge(self::$options, $options);
 
@@ -47,7 +58,7 @@ class Gpm
             return false;
         }
 
-        $packages = is_array($packages) ? $packages : [ $packages ];
+        $packages = is_array($packages) ? $packages : [$packages];
         $count = count($packages);
 
         $packages = array_filter(array_map(function ($p) {
@@ -57,6 +68,8 @@ class Gpm
         if (!$options['skip_invalid'] && $count !== count($packages)) {
             return false;
         }
+
+        $messages = '';
 
         foreach ($packages as $package) {
             if (isset($package->dependencies) && $options['install_deps']) {
@@ -80,30 +93,53 @@ class Gpm
 
             $local = static::download($package);
 
-            Installer::install($local, $options['destination'], ['install_path' => $package->install_path, 'theme' => $options['theme']]);
+            Installer::install($local, $options['destination'],
+                ['install_path' => $package->install_path, 'theme' => $options['theme']]);
             Folder::delete(dirname($local));
 
             $errorCode = Installer::lastErrorCode();
+            if ($errorCode) {
+                $msg = Installer::lastErrorMsg();
+                throw new \RuntimeException($msg);
+            }
 
-            if (Installer::lastErrorCode() & (Installer::ZIP_OPEN_ERROR | Installer::ZIP_EXTRACT_ERROR)) {
-                return false;
+            if (count($packages) == 1) {
+                $message = Installer::getMessage();
+                if ($message) {
+                    return $message;
+                } else {
+                    $messages .= $message;
+                }
             }
         }
 
-        return true;
+        return $messages ?: true;
     }
 
-    public static function update($packages, $options)
+    /**
+     * @param Package[]|string[]|string $packages
+     * @param array                     $options
+     *
+     * @return bool
+     */
+    public static function update($packages, array $options)
     {
         $options['overwrite'] = true;
+
         return static::install($packages, $options);
     }
 
-    public static function uninstall($packages, $options)
+    /**
+     * @param Package[]|string[]|string $packages
+     * @param array                     $options
+     *
+     * @return bool
+     */
+    public static function uninstall($packages, array $options)
     {
         $options = array_merge(self::$options, $options);
 
-        $packages = is_array($packages) ? $packages : [ $packages ];
+        $packages = is_array($packages) ? $packages : [$packages];
         $count = count($packages);
 
         $packages = array_filter(array_map(function ($p) {
@@ -124,7 +160,7 @@ class Gpm
 
         foreach ($packages as $package) {
 
-            $location = self::getGrav()['locator']->findResource($package->package_type . '://' . $package->slug);
+            $location = Grav::instance()['locator']->findResource($package->package_type . '://' . $package->slug);
 
             // Check destination
             Installer::isValidDestination($location);
@@ -137,37 +173,61 @@ class Gpm
 
             $errorCode = Installer::lastErrorCode();
             if ($errorCode && $errorCode !== Installer::IS_LINK && $errorCode !== Installer::EXISTS) {
-                return false;
+                $msg = Installer::lastErrorMsg();
+                throw new \RuntimeException($msg);
+            }
+
+            if (count($packages) == 1) {
+                $message = Installer::getMessage();
+                if ($message) {
+                    return $message;
+                }
             }
         }
 
         return true;
     }
 
-    private static function download($package)
+    /**
+     * @param Package $package
+     *
+     * @return string
+     */
+    private static function download(Package $package)
     {
         $contents = Response::get($package->zipball_url, []);
 
-        $cache_dir = self::getGrav()['locator']->findResource('cache://', true);
+        $cache_dir = Grav::instance()['locator']->findResource('cache://', true);
         $cache_dir = $cache_dir . DS . 'tmp/Grav-' . uniqid();
         Folder::mkdir($cache_dir);
 
         $filename = $package->slug . basename($package->zipball_url);
 
-        file_put_contents($cache_dir . DS . $filename, $contents);
+        file_put_contents($cache_dir . DS . $filename . '.zip', $contents);
 
-        return $cache_dir . DS . $filename;
+        return $cache_dir . DS . $filename . '.zip';
     }
 
-    private static function _downloadSelfupgrade($package, $tmp)
+    /**
+     * @param array  $package
+     * @param string $tmp
+     *
+     * @return string
+     */
+    private static function _downloadSelfupgrade(array $package, $tmp)
     {
         $output = Response::get($package['download'], []);
         Folder::mkdir($tmp);
         file_put_contents($tmp . DS . $package['name'], $output);
+
         return $tmp . DS . $package['name'];
     }
 
-    public static function selfupgrade() {
+    /**
+     * @return bool
+     */
+    public static function selfupgrade()
+    {
         $upgrader = new Upgrader();
 
         if (!Installer::isGravInstance(GRAV_ROOT)) {
@@ -176,11 +236,25 @@ class Gpm
 
         if (is_link(GRAV_ROOT . DS . 'index.php')) {
             Installer::setError(Installer::IS_LINK);
+
+            return false;
+        }
+
+        if (method_exists($upgrader, 'meetsRequirements') && !$upgrader->meetsRequirements()) {
+            $error = [];
+            $error[] = '<p>Grav has increased the minimum PHP requirement.<br />';
+            $error[] = 'You are currently running PHP <strong>' . PHP_VERSION . '</strong>';
+            $error[] = ', but PHP <strong>' . GRAV_PHP_MIN . '</strong> is required.</p>';
+            $error[] = '<p><a href="http://getgrav.org/blog/changing-php-requirements-to-5.5" class="button button-small secondary">Additional information</a></p>';
+
+            Installer::setError(implode("\n", $error));
+
             return false;
         }
 
         $update = $upgrader->getAssets()['grav-update'];
-        $tmp = CACHE_DIR . 'tmp/Grav-' . uniqid();
+        $cache_dir = Grav::instance()['locator']->findResource('cache://', true);
+        $tmp = $cache_dir . 'tmp/Grav-' . uniqid();
         $file = self::_downloadSelfupgrade($update, $tmp);
 
         Installer::install($file, GRAV_ROOT,

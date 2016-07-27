@@ -2,17 +2,21 @@
 namespace Grav\Plugin;
 
 use Grav\Common\Plugin;
-use Grav\Common\Page\Page;
-use Grav\Common\Page\Pages;
-use Grav\Common\Grav;
+use Grav\Common\Utils;
 use Grav\Common\Uri;
-use Grav\Common\Twig;
-use Grav\Plugin\Form;
-use RocketTheme\Toolbox\Event\Event;
+use Symfony\Component\Yaml\Yaml;
 use RocketTheme\Toolbox\File\File;
+use RocketTheme\Toolbox\Event\Event;
 
+/**
+ * Class FormPlugin
+ * @package Grav\Plugin
+ */
 class FormPlugin extends Plugin
 {
+    public $features = [
+        'blueprints' => 1000
+    ];
 
     /**
      * @var bool
@@ -30,11 +34,18 @@ class FormPlugin extends Plugin
     public static function getSubscribedEvents()
     {
         return [
-            'onPageInitialized' => ['onPageInitialized', 0],
+            'onPluginsInitialized' => ['onPluginsInitialized', 0],
+            'onPageInitialized'   => ['onPageInitialized', 0],
             'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
             'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
-            'onFormProcessed' => ['onFormProcessed', 0]
+            'onFormFieldTypes'    => ['onFormFieldTypes', 0]
         ];
+    }
+
+    public function onPluginsInitialized()
+    {
+        require_once(__DIR__ . '/classes/form.php');
+        require_once(__DIR__ . '/classes/form_serializable.php');
     }
 
     /**
@@ -42,6 +53,8 @@ class FormPlugin extends Plugin
      */
     public function onPageInitialized()
     {
+
+
         /** @var Page $page */
         $page = $this->grav['page'];
         if (!$page) {
@@ -52,9 +65,13 @@ class FormPlugin extends Plugin
         if (isset($header->form) && is_array($header->form)) {
             $this->active = true;
 
-            // Create form.
-            require_once __DIR__ . '/classes/form.php';
+            // Create form
             $this->form = new Form($page);
+
+            $this->enable([
+                'onFormProcessed'       => ['onFormProcessed', 0],
+                'onFormValidationError' => ['onFormValidationError', 0]
+            ]);
 
             // Handle posting if needed.
             if (!empty($_POST)) {
@@ -63,7 +80,7 @@ class FormPlugin extends Plugin
         }
     }
 
-        /**
+    /**
      * Add current directory to twig lookup paths.
      */
     public function onTwigTemplatePaths()
@@ -94,44 +111,63 @@ class FormPlugin extends Plugin
         $action = $event['action'];
         $params = $event['params'];
 
-        if (!$this->active) {
-            return;
-        }
-
-        if (!$this->validate($form)) {
-            /** @var Language $l */
-            $l = $this->grav['language'];
-            $this->form->message = $l->translate('FORM_PLUGIN.NOT_VALIDATED');
-            $uri = $this->grav['uri'];
-            $route = $uri->route();
-
-            /** @var Twig $twig */
-            $twig = $this->grav['twig'];
-            $twig->twig_vars['form'] = $form;
-
-            /** @var Pages $pages */
-            $pages = $this->grav['pages'];
-            $page = $pages->dispatch($route, true);
-            unset($this->grav['page']);
-            $this->grav['page'] = $page;
-
-            return;
-        }
+        $this->process($form);
 
         switch ($action) {
+            case 'captcha':
+                // Validate the captcha
+                $query = http_build_query([
+                    'secret'   => isset($params['recaptcha_secret']) ? $params['recaptcha_secret'] : isset($params['recatpcha_secret']) ? $params['recatpcha_secret'] : $this->config->get('plugins.form.recaptcha.secret_key'),
+                    'response' => $this->form->value('g-recaptcha-response', true)
+                ]);
+                $url = 'https://www.google.com/recaptcha/api/siteverify?' . $query;
+                $response = json_decode(file_get_contents($url), true);
+
+                if (!isset($response['success']) || $response['success'] !== true) {
+                    $this->grav->fireEvent('onFormValidationError', new Event([
+                        'form'    => $form,
+                        'message' => $this->grav['language']->translate('PLUGIN_FORM.ERROR_VALIDATING_CAPTCHA')
+                    ]));
+                    $event->stopPropagation();
+
+                    return;
+                }
+                break;
+            case 'ip':
+                $label = isset($params['label']) ? $params['label'] : 'User IP';
+                $blueprint = $this->form->value()->blueprints();
+                $blueprint->set('form/fields/ip', ['name'=>'ip', 'label'=> $label]);
+                $this->form->setFields($blueprint->fields());
+                $this->form->setData('ip', Uri::ip());
+                break;
             case 'message':
-                $this->form->message = (string) $params;
+                $translated_string = $this->grav['language']->translate($params);
+                $vars = array(
+                    'form' => $form
+                );
+
+                /** @var Twig $twig */
+                $twig = $this->grav['twig'];
+                $processed_string = $twig->processString($translated_string, $vars);
+
+                $this->form->message = $processed_string;
                 break;
             case 'redirect':
-                $this->grav->redirect((string) $params);
+                $form = new FormSerializable();
+                $form->message = $this->form->message;
+                $form->message_color = $this->form->message_color;
+                $form->fields = $this->form->fields;
+                $form->data = $this->form->value();
+                $this->grav['session']->setFlashObject('form', $form);
+                $this->grav->redirect((string)$params);
                 break;
             case 'reset':
-                if (in_array($params, array(true, 1, '1', 'yes', 'on', 'true'), true)) {
+                if (Utils::isPositive($params)) {
                     $this->form->reset();
                 }
                 break;
             case 'display':
-                $route = (string) $params;
+                $route = (string)$params;
                 if (!$route || $route[0] != '/') {
                     /** @var Uri $uri */
                     $uri = $this->grav['uri'];
@@ -145,6 +181,11 @@ class FormPlugin extends Plugin
                 /** @var Pages $pages */
                 $pages = $this->grav['pages'];
                 $page = $pages->dispatch($route, true);
+
+                if (!$page) {
+                    throw new \RuntimeException('Display page not found. Please check the page exists.', 400);
+                }
+
                 unset($this->grav['page']);
                 $this->grav['page'] = $page;
                 break;
@@ -152,46 +193,151 @@ class FormPlugin extends Plugin
                 $prefix = !empty($params['fileprefix']) ? $params['fileprefix'] : '';
                 $format = !empty($params['dateformat']) ? $params['dateformat'] : 'Ymd-His-u';
                 $ext = !empty($params['extension']) ? '.' . trim($params['extension'], '.') : '.txt';
-                $filename = $prefix . $this->udate($format) . $ext;
+                $filename = !empty($params['filename']) ? $params['filename'] : '';
+                $operation = !empty($params['operation']) ? $params['operation'] : 'create';
+
+                if (!$filename) {
+                    $filename = $prefix . $this->udate($format) . $ext;
+                }
 
                 /** @var Twig $twig */
                 $twig = $this->grav['twig'];
-                $vars = array(
+                $vars = [
                     'form' => $this->form
-                );
+                ];
 
-                $file = File::instance(DATA_DIR . $this->form->name . '/' . $filename);
-                $body = $twig->processString(
-                    !empty($params['body']) ? $params['body'] : '{% include "forms/data.txt.twig" %}',
-                    $vars
-                );
-                $file->save($body);
+                $locator = $this->grav['locator'];
+                $path = $locator->findResource('user://data', true);
+                $dir = $path . DS . $this->form->name;
+                $fullFileName = $dir. DS . $filename;
+
+                $file = File::instance($fullFileName);
+
+                if ($operation == 'create') {
+                    $body = $twig->processString(!empty($params['body']) ? $params['body'] : '{% include "forms/data.txt.twig" %}',
+                        $vars);
+                    $file->save($body);
+                } elseif ($operation == 'add') {
+                    if (!empty($params['body'])) {
+                        // use body similar to 'create' action and append to file as a log
+                        $body = $twig->processString($params['body'], $vars);
+
+                        // create folder if it doesn't exist
+                        if (!file_exists($dir)) {
+                            mkdir($dir);
+                        }
+
+                        // append data to existing file
+                        file_put_contents($fullFileName, $body, FILE_APPEND | LOCK_EX);
+                    } else {
+                        // serialize YAML out to file for easier parsing as data sets
+                        $vars = $vars['form']->value()->toArray();
+
+                        foreach ($form->fields as $field) {
+                            if (isset($field['process']) && isset($field['process']['ignore']) && $field['process']['ignore']) {
+                                unset($vars[$field['name']]);
+                            }
+                        }
+
+                        if (file_exists($fullFileName)) {
+                            $data = Yaml::parse($file->content());
+                            if (count($data) > 0) {
+                                array_unshift($data, $vars);
+                            } else {
+                                $data[] = $vars;
+                            }
+                        } else {
+                            $data[] = $vars;
+                        }
+
+                        $file->save(Yaml::dump($data));
+                    }
+
+                }
+                break;
         }
     }
 
     /**
-     * Validate a form
+     * Handle form validation error
+     *
+     * @param  Event $event An event object
+     */
+    public function onFormValidationError(Event $event)
+    {
+        $form = $event['form'];
+        if (isset($event['message'])) {
+            $form->message_color = 'red';
+            $form->message = $event['message'];
+        }
+
+        $uri = $this->grav['uri'];
+        $route = $uri->route();
+
+        /** @var Twig $twig */
+        $twig = $this->grav['twig'];
+        $twig->twig_vars['form'] = $form;
+
+        /** @var Pages $pages */
+        $pages = $this->grav['pages'];
+        $page = $pages->dispatch($route, true);
+
+        if ($page) {
+            unset($this->grav['page']);
+            $this->grav['page'] = $page;
+        }
+
+        $event->stopPropagation();
+    }
+
+    /**
+     * Get list of form field types specified in this plugin. Only special types needs to be listed.
+     *
+     * @return array
+     */
+    public function getFormFieldTypes()
+    {
+        return [
+            'display' => [
+                'input@' => false
+            ],
+            'spacer'  => [
+                'input@' => false
+            ],
+            'captcha' => [
+                'input@' => false
+            ]
+        ];
+    }
+
+    /**
+     * Process a form
+     *
+     * Currently available processing tasks:
+     *
+     * - fillWithCurrentDateTime
      *
      * @param Form $form
+     *
      * @return bool
      */
-    protected function validate($form) {
+    protected function process($form)
+    {
         foreach ($form->fields as $field) {
-            if (isset($field['validate']) && isset($field['validate']['required']) && $field['validate']['required']) {
-                if (!$form->value($field['name'])) {
-                    return false;
+            if (isset($field['process'])) {
+                if (isset($field['process']['fillWithCurrentDateTime']) && $field['process']['fillWithCurrentDateTime']) {
+                    $form->setData($field['name'], gmdate('D, d M Y H:i:s', time()));
                 }
             }
         }
-
-        return true;
     }
 
     /**
      * Create unix timestamp for storing the data into the filesystem.
      *
      * @param string $format
-     * @param int $utimestamp
+     * @param int    $utimestamp
+     *
      * @return string
      */
     private function udate($format = 'u', $utimestamp = null)

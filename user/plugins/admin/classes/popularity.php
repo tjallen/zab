@@ -3,16 +3,15 @@ namespace Grav\Plugin;
 
 use Grav\Common\Config\Config;
 use Grav\Common\Grav;
-use Grav\Common\Plugins;
-use Grav\Common\Themes;
 use Grav\Common\Page\Page;
 use Grav\Common\Data;
-use Grav\Common\GravTrait;
 
+/**
+ * Class Popularity
+ * @package Grav\Plugin
+ */
 class Popularity
 {
-    use GravTrait;
-
     /** @var Config */
     protected $config;
     protected $data_path;
@@ -36,26 +35,26 @@ class Popularity
 
     public function __construct()
     {
-        $this->config = self::getGrav()['config'];
+        $this->config = Grav::instance()['config'];
 
-        $this->data_path = self::$grav['locator']->findResource('log://popularity', true, true);
-        $this->daily_file = $this->data_path.'/'.self::DAILY_FILE;
-        $this->monthly_file = $this->data_path.'/'.self::MONTHLY_FILE;
-        $this->totals_file = $this->data_path.'/'.self::TOTALS_FILE;
-        $this->visitors_file = $this->data_path.'/'.self::VISITORS_FILE;
+        $this->data_path = Grav::instance()['locator']->findResource('log://popularity', true, true);
+        $this->daily_file = $this->data_path . '/' . self::DAILY_FILE;
+        $this->monthly_file = $this->data_path . '/' . self::MONTHLY_FILE;
+        $this->totals_file = $this->data_path . '/' . self::TOTALS_FILE;
+        $this->visitors_file = $this->data_path . '/' . self::VISITORS_FILE;
 
     }
 
     public function trackHit()
     {
         // Don't track bot or crawler requests
-        if (!self::getGrav()['browser']->isHuman()) {
+        if (!Grav::instance()['browser']->isHuman()) {
             return;
         }
 
         /** @var Page $page */
-        $page = self::getGrav()['page'];
-        $relative_url = str_replace(self::getGrav()['base_url_relative'], '', $page->url());
+        $page = Grav::instance()['page'];
+        $relative_url = str_replace(Grav::instance()['base_url_relative'], '', $page->url());
 
         // Don't track error pages or pages that have no route
         if ($page->template() == 'error' || !$page->route()) {
@@ -63,7 +62,7 @@ class Popularity
         }
 
         // Make sure no 'widcard-style' ignore matches this url
-        foreach ((array) $this->config->get('plugins.admin.popularity.ignore') as $ignore) {
+        foreach ((array)$this->config->get('plugins.admin.popularity.ignore') as $ignore) {
             if (fnmatch($ignore, $relative_url)) {
                 return;
             }
@@ -79,7 +78,7 @@ class Popularity
         $this->updateDaily();
         $this->updateMonthly();
         $this->updateTotals($page->route());
-        $this->updateVisitors(self::getGrav()['uri']->ip());
+        $this->updateVisitors(Grav::instance()['uri']->ip());
 
     }
 
@@ -110,6 +109,9 @@ class Popularity
         file_put_contents($this->daily_file, json_encode($this->daily_data));
     }
 
+    /**
+     * @return array
+     */
     public function getDailyChartData()
     {
         if (!$this->daily_data) {
@@ -119,17 +121,22 @@ class Popularity
         $limit = intval($this->config->get('plugins.admin.popularity.dashboard.days_of_stats', 7));
         $chart_data = array_slice($this->daily_data, -$limit, $limit);
 
-        $labels = array();
-        $data = array();
+        $labels = [];
+        $data = [];
 
         foreach ($chart_data as $date => $count) {
-            $labels[] = self::getGrav()['grav']['admin']->translate(['PLUGIN_ADMIN.' . strtoupper(date('D', strtotime($date)))]);
+            $labels[] = Grav::instance()['grav']['admin']->translate([
+                'PLUGIN_ADMIN.' . strtoupper(date('D', strtotime($date)))
+            ]);
             $data[] = $count;
         }
 
-        return array('labels' => json_encode($labels), 'data' => json_encode($data));
+        return ['labels' => $labels, 'data' => $data];
     }
 
+    /**
+     * @return int
+     */
     public function getDailyTotal()
     {
         if (!$this->daily_data) {
@@ -143,6 +150,9 @@ class Popularity
         }
     }
 
+    /**
+     * @return int
+     */
     public function getWeeklyTotal()
     {
         if (!$this->daily_data) {
@@ -154,12 +164,17 @@ class Popularity
         foreach (array_reverse($this->daily_data) as $daily) {
             $total += $daily;
             $day++;
-            if ($day == 7) break;
+            if ($day == 7) {
+                break;
+            }
         }
 
         return $total;
     }
 
+    /**
+     * @return int
+     */
     public function getMonthlyTotal()
     {
         if (!$this->monthly_data) {
@@ -197,22 +212,29 @@ class Popularity
         file_put_contents($this->monthly_file, json_encode($this->monthly_data));
     }
 
+    /**
+     * @return array
+     */
     protected function getMonthyChartData()
     {
         if (!$this->monthly_data) {
             $this->monthly_data = $this->getData($this->monthly_file);
         }
 
-        $labels = array();
-        $data = array();
+        $labels = [];
+        $data = [];
 
         foreach ($this->monthly_data as $date => $count) {
             $labels[] = date('M', strtotime($date));
             $data[] = $count;
         }
-        return array('labels' => $labels, 'data' => $data);
+
+        return ['labels' => $labels, 'data' => $data];
     }
 
+    /**
+     * @param string $url
+     */
     protected function updateTotals($url)
     {
         if (!$this->totals_data) {
@@ -229,6 +251,9 @@ class Popularity
         file_put_contents($this->totals_file, json_encode($this->totals_data));
     }
 
+    /**
+     * @param string $ip
+     */
     protected function updateVisitors($ip)
     {
         if (!$this->visitors_data) {
@@ -246,17 +271,26 @@ class Popularity
         file_put_contents($this->visitors_file, json_encode($this->visitors_data));
     }
 
+    /**
+     * @param string $path
+     *
+     * @return array
+     */
     protected function getData($path)
     {
-        return (array) @json_decode(file_get_contents($path), true);
+        if (file_exists($path)) {
+            return (array)json_decode(file_get_contents($path), true);
+        } else {
+            return [];
+        }
     }
 
 
     public function flushPopularity()
     {
-        file_put_contents($this->daily_file, array());
-        file_put_contents($this->monthly_file, array());
-        file_put_contents($this->totals_file, array());
-        file_put_contents($this->visitors_file, array());
+        file_put_contents($this->daily_file, []);
+        file_put_contents($this->monthly_file, []);
+        file_put_contents($this->totals_file, []);
+        file_put_contents($this->visitors_file, []);
     }
 }

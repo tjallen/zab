@@ -1,5 +1,5 @@
 name: Admin Panel
-version: 0.6.1
+version: 1.1.1
 description: Adds an advanced administration panel to manage your site
 icon: empire
 author:
@@ -13,9 +13,10 @@ readme: https://github.com/getgrav/grav-plugin-admin/blob/develop/README.md
 license: MIT
 
 dependencies:
-  - form
-  - email
-  - login
+    - { name: grav, version: '~1.1' }
+    - { name: form, version: '~1.3' }
+    - { name: email, version: '~2.0' }
+    - { name: login, version: '~2.0' }
 
 form:
   validation: loose
@@ -27,12 +28,12 @@ form:
 
     enabled:
       type: hidden
-      label: Plugin status
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
       highlight: 1
       default: 0
       options:
-        1: Enabled
-        0: Disabled
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
 
@@ -42,6 +43,50 @@ form:
       size: medium
       placeholder: "Default route for administrator (relative to base)"
       help: If you want to change the URL for the administrator, you can provide a path here
+
+    logo_text:
+      type: text
+      label: Logo text
+      size: medium
+      placeholder: "Grav"
+      help: Text to display in place of the default Grav logo
+
+    body_classes:
+      type: text
+      label: Body classes
+      size: medium
+      help: Add a space separated name of custom body classes
+
+    sidebar.activate:
+      type: select
+      label: Sidebar Activation
+      help: Control how the sidebar is activated
+      size: small
+      default: tab
+      options:
+        tab: Tab
+        hover: Hover
+
+    sidebar.hover_delay:
+      type: text
+      size: x-small
+      append: millseconds
+      label: Hover delay
+      default: 500
+      validate:
+        type: number
+        min: 1
+
+
+    sidebar.size:
+      type: select
+      label: Sidebar Size
+      help: Control the width of the sidebar
+      size: medium
+      default: auto
+      options:
+        auto: Automatic width
+        small: Small width
 
     theme:
       type: hidden
@@ -64,23 +109,26 @@ form:
       highlight: 1
       default: 1
       options:
-        1: Enabled
-        0: Disabled
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
       help: Use Google custom fonts.  Disable this to use Helvetica. Useful when using Cyrillic and other languages with unsupported characters.
 
     show_beta_msg:
+      type: hidden
+
+    show_github_msg:
       type: toggle
-      label: Show Beta Message
+      label: Show GitHub Link
       highlight: 1
       default: 1
       options:
-        1: Enabled
-        0: Disabled
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
-      help: Show the beta warning message on the dashboard
+      help: Show the "Found an issue? Please report it on GitHub." message.
 
     enable_auto_updates_check:
       type: toggle
@@ -88,8 +136,8 @@ form:
       highlight: 1
       default: 1
       options:
-        1: Enabled
-        0: Disabled
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
       help: Shows an informative message, in the admin panel, when an update is available.
@@ -98,6 +146,7 @@ form:
       type: text
       size: small
       label: Session Timeout
+      append: secs
       help: "Sets the session timeout in seconds"
       validate:
           type: number
@@ -109,8 +158,8 @@ form:
       highlight: 1
       default: 1
       options:
-        1: Enabled
-        0: Disabled
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
       help: Ask the user confirmation when deleting a page
@@ -126,8 +175,8 @@ form:
       highlight: 1
       default: 1
       options:
-        1: Enabled
-        0: Disabled
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
       help: Enable the visitors stats collecting feature
@@ -135,6 +184,7 @@ form:
     dashboard.days_of_stats:
       type: text
       label: Days of stats
+      append: days
       size: x-small
       default: 7
       help: Keep stats for the specified number of days, then drop them
@@ -164,3 +214,5 @@ form:
       type: hidden
       label: Visitors history
       default: 20
+
+

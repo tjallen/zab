@@ -9,7 +9,7 @@
 }
 
 #grav-login .form-actions {
-    text-align: center;
+    text-align: right;
 }
 
 #grav-logout {
@@ -20,4 +20,58 @@
 
 .alert.info {
     color: #c00;
+}
+
+#grav-login p {
+    font-size: small;
+    margin: 1rem 0;
+    padding: 0;
+    text-align: center;
+}
+#grav-login .form-actions p {
+    margin-bottom: 0;
+}
+
+#grav-login .button {
+    vertical-align: middle;
+}
+
+#grav-login .delimiter {
+    display: block;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    line-height: 1.6rem;
+    position: relative;
+    text-transform: uppercase;
+    margin: 1rem 0;
+}
+
+#grav-login .delimiter:after,
+#grav-login .delimiter:before {
+    background-color: #777777;
+    content: "";
+    height: 1px;
+    position: absolute;
+    top: 0.8rem;
+    width: 40%;
+}
+#grav-login .delimiter:before {
+    background-image: -moz-linear-gradient(right center , #777777, #ffffff);
+    left: 0;
+}
+#grav-login .delimiter:after {
+    background-image: -moz-linear-gradient(left center , #777777, #ffffff);
+    right: 0;
+}
+
+#grav-login .rememberme {
+    display: inline-block;
+    float: left;
+    padding: 7px 0;
+    vertical-align: middle;
+}
+
+#grav-login .rememberme label {
+    font-weight: inherit;
+    display: inline;
 }

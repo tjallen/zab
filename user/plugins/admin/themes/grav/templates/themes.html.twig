@@ -2,18 +2,35 @@
 
 {% if admin.route %}
     {% set installing = admin.route starts with 'install' %}
-    {% set installed = true %}
 
-    {# Try installed packages first, then remote #}
-    {% set package = admin.themes(true)[admin.route] %}
-    {% if (not package) %}
-        {% set package = admin.themes(false)[admin.route] %}
-        {% set installed = false %}
+    {% if installing %}
+        {% set title = "PLUGIN_ADMIN.THEMES"|tu %}
+    {% else %}
+        {% set installed = true %}
+
+        {# Try installed packages first, then remote #}
+        {% set package = admin.themes(true)[admin.route] %}
+        {% if (not package) %}
+            {% set package = admin.themes(false)[admin.route] %}
+            {% set installed = false %}
+        {% endif %}
+
+        {% set theme = package.toArray() %}
+        {% set title = "PLUGIN_ADMIN.THEME"|tu ~ ": " ~ theme.name|e %}
     {% endif %}
+{% else %}
+    {% set title = "PLUGIN_ADMIN.THEMES"|tu %}
+{% endif %}
 
-    {% set theme = package.toArray() %}
-    {% set title = "PLUGIN_ADMIN.THEME"|tu ~ ": " ~ theme.name|e %}
+{% if admin.route or installing %}
+    {% block stylesheets %}
+        {% do assets.addCss(theme_url~'/css/codemirror/codemirror.css') %}
+        {{ parent() }}
+    {% endblock %}
 
+    {% block javascripts %}
+        {{ parent() }}
+    {% endblock %}
 {% endif %}
 
 {% block titlebar %}
@@ -29,7 +46,7 @@
             {% endif %}
         {% endif %}
         </div>
-        <h1><i class="fa fa-fw fa-plug"></i> {{ "PLUGIN_ADMIN.THEMES"|tu }}</h1>
+        <h1><i class="fa fa-fw fa-tint"></i> {{ "PLUGIN_ADMIN.THEMES"|tu }}</h1>
     {% else %}
         {% if (installed) %}
         <div class="button-bar">
